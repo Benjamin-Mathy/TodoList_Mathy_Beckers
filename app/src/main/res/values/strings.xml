@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">2Dew</string>
+    <string name="activity_main">2Dew - Lists</string>
+    <string name="activity_imagelist">2Dew - Images List</string>
+    <string name="activity_textlist">2Dew - Text List</string>
+
+    <string name="search">Search</string>
 </resources>
