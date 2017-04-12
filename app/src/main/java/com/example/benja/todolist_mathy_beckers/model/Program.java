@@ -1,9 +1,7 @@
 package com.example.benja.todolist_mathy_beckers.model;
 
-import android.graphics.Color;
-
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by Max on 10-04-17.
@@ -11,7 +9,7 @@ import java.util.Collection;
 
 public class Program {
 
-    Collection<Todo> todos;
+    List<Todo> todos;
 
     public void addTextTodo(){
         todos.add(new Todo("Nouvelle liste", null, new ArrayList<Element>()));
@@ -19,5 +17,9 @@ public class Program {
 
     public void addImageTodo(){
         todos.add(new Todo("Nouvelle liste", null, new ArrayList<ElementImage>()));
+    }
+
+    public void removeTodo(Todo todo){
+        todos.remove(todo);
     }
 }

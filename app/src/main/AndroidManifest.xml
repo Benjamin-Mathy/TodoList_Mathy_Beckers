@@ -2,19 +2,54 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.benja.todolist_mathy_beckers" >
 
+    <!--Permissions-->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.CAPTURE_AUDIO_OUTPUT" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
-        <activity android:name=".view.MainActivity" >
+
+        <activity
+            android:name=".view.MainActivity"
+            android:label="2Dew - All Lists">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".view.TodoImageActivity"
+            android:label="2Dew - Image Todolist"
+            android:parentActivityName=".view.MainActivity">
+
+            <!-- Metadata pour le support des versions antérieures -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.MainActivity" />
+        </activity>
+
+        <activity
+            android:name=".view.TodoTextActivity"
+            android:label="2Dew - Text Todolist"
+            android:parentActivityName=".view.MainActivity">
+
+            <!-- Metadata pour le support des versions antérieures -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.MainActivity" />
+        </activity>
+
     </application>
 
 </manifest>
