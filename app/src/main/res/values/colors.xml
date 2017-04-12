@@ -4,4 +4,5 @@
     <color name="colorPrimaryDark">#006064</color>
     <color name="colorAccent">#FF9800</color>
     <color name="colorAccentDark">#E65100</color>
+    <color name="titleToolbar">#FFFFFFFF</color>
 </resources>
