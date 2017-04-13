@@ -20,7 +20,7 @@
 
         <activity
             android:name=".view.MainActivity"
-            android:label="2Dew - All Lists">
+            android:label="2 Dew">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
