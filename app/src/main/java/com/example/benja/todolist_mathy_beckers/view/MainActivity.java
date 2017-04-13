@@ -6,10 +6,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.widget.ListView;
 
 import com.example.benja.todolist_mathy_beckers.R;
+import com.example.benja.todolist_mathy_beckers.adapter.TodosAdapter;
+import com.example.benja.todolist_mathy_beckers.presenter.IMainPresenter;
+import com.example.benja.todolist_mathy_beckers.presenter.MainPresenter;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements IMainActivity {
+
+    private TodosAdapter adapter;
+    private IMainPresenter presenter = new MainPresenter(this);
+
+    private ListView todos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +28,10 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
+
+        todos = (ListView) findViewById(R.id.todos);
+        adapter = new TodosAdapter(this, presenter.getAllTodos());
+        todos.setAdapter(adapter);
     }
 
     @Override

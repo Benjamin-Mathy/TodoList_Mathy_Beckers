@@ -15,12 +15,25 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimary"
-        android:elevation="4dp">
+        android:elevation="4dp"
+        app:titleTextColor="@color/whiteText">
     </android.support.v7.widget.Toolbar>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:id="@+id/MainActivity">
+
+        <ListView
+            android:id="@+id/todos"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_margin="8dp"
+            android:divider="@null"
+            android:dividerHeight="8dp"
+            android:elevation="1dp"/>
 
         <Button
             android:background="@drawable/round_button"
@@ -33,7 +46,8 @@
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="15dp"
             android:layout_marginBottom="150dp"
-            android:id="@+id/textList" />
+            android:id="@+id/textList"
+            android:elevation="2dp" />
 
         <Button
             android:background="@drawable/round_button"
@@ -46,7 +60,8 @@
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="15dp"
             android:layout_marginBottom="85dp"
-            android:id="@+id/imageList" />
+            android:id="@+id/imageList"
+            android:elevation="2dp" />
 
         <Button
             android:background="@drawable/round_button"
@@ -59,7 +74,8 @@
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="15dp"
             android:layout_marginBottom="20dp"
-            android:id="@+id/soundList" />
+            android:id="@+id/soundList"
+            android:elevation="2dp" />
 
     </RelativeLayout>
 

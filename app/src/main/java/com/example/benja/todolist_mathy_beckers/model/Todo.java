@@ -14,16 +14,24 @@ import java.util.List;
  */
 public class Todo<T extends Element>{
 
+    private int id;
     private String name;
-    private Color color;
+    private Colors color;
     private List<T> elements = new ArrayList<>();
     //private Notification notification ?
 
-    public Todo(String name, Color color, List<T> elements){
+    public Todo(int id, String name, Colors color, List<T> elements){
+        this.id = id;
         this.name = name;
         this.color = color;
         this.elements = elements;
     }
+
+    public int getId(){return this.id;}
+
+    public String getName(){return this.name;}
+
+    public Colors getColor(){return this.color;}
 
     public void rename(String name){
         this.name = name;
