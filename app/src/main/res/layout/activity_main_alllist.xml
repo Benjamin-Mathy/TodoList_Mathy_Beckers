@@ -9,7 +9,6 @@
     tools:context="com.example.benja.todolist_mathy_beckers.view.MainActivity">
 
     <!-- Action bar custom -->
-
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -33,7 +32,8 @@
             android:layout_margin="8dp"
             android:divider="@null"
             android:dividerHeight="8dp"
-            android:elevation="1dp"/>
+            android:elevation="1dp"
+            android:scrollbars="none"/>
 
         <Button
             android:background="@drawable/round_button"
