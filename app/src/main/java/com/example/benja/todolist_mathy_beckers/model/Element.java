@@ -7,8 +7,9 @@ package com.example.benja.todolist_mathy_beckers.model;
 /**
  * Classe représentant un élément textuel de todolist
  */
-public abstract class Element {
+public class Element {
 
+    private int id;
     private String text;
 
     public Element(String text){
@@ -18,4 +19,6 @@ public abstract class Element {
     public void editText(String text){
         this.text = text;
     }
+
+    public int getId(){return this.id;}
 }
