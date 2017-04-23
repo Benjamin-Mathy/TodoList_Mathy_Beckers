@@ -1,12 +1,10 @@
 package com.example.benja.todolist_mathy_beckers.view;
 
-import android.support.v4.content.ContextCompat;
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.benja.todolist_mathy_beckers.R;
@@ -41,4 +39,6 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
+
+
 }
