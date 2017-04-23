@@ -6,4 +6,12 @@
     <color name="colorAccentDark">#0277BD</color>
     <color name="whiteText">#FFFFFFFF</color>
     <color name="blackText">#000000</color>
+
+    <color name="listRed">#E57373</color>
+    <color name="listGreen">#81C784</color>
+    <color name="listYellow">#FFF176</color>
+    <color name="listBlue">#64B5F6</color>
+    <color name="listOrange">#FFB74D</color>
+    <color name="listGrey">#B0BEC5</color>
+    <color name="listPink">#F48FB1</color>
 </resources>

@@ -1,6 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.benja.todolist_mathy_beckers.view.TodoImageActivity">
+
+    <!-- Action bar custom -->
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:elevation="4dp"
+        app:titleTextColor="@color/whiteText">
+    </android.support.v7.widget.Toolbar>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/TodoImageActivity">
+
+        <ListView
+            android:id="@+id/imageElements"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_margin="8dp"
+            android:divider="@null"
+            android:dividerHeight="8dp"
+            android:elevation="1dp"
+            android:scrollbars="none"/>
+
+        <Button
+            android:background="@drawable/round_button"
+            android:drawableTop="@drawable/ic_add_24dp"
+            android:paddingTop="15dp"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="80dp"
+            android:layout_marginBottom="20dp"
+            android:id="@+id/addElement"
+            android:elevation="2dp" />
+
+        <Button
+            android:background="@drawable/round_button"
+            android:drawableTop="@drawable/ic_settings_24dp"
+            android:paddingTop="15dp"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="20dp"
+            android:id="@+id/parametersMenu"
+            android:elevation="2dp" />
+
+    </RelativeLayout>
 
 </LinearLayout>
