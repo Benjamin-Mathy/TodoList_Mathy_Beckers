@@ -13,6 +13,8 @@ public class Element {
     private String text;
     private int index;
 
+    public Element(){}
+
     public Element(String text, int index){
         this.text = text;
         this.index = index;
@@ -38,5 +40,9 @@ public class Element {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public void setText(String text) {
+        this.text = text;
     }
 }

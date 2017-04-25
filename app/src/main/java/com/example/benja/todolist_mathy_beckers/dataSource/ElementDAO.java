@@ -60,6 +60,51 @@ public class ElementDAO extends BaseDAO implements IElementDAO {
 
     @Override
     public List<Element> readElement(int idTodolist) {
+        Cursor cursor = getElements(idTodolist);
+
+        List<Element> Elements = new ArrayList<>();
+        while(cursor.moveToNext()) {
+            Element currentElement = new Element();
+            currentElement.setId(cursor.getLong(cursor.getColumnIndexOrThrow(ElementTable.FeedEntry._ID)));
+            currentElement.setIndex(cursor.getInt(cursor.getColumnIndexOrThrow(ElementTable.FeedEntry.COLUMN_INDEX)));
+            currentElement.setText(cursor.getString(cursor.getColumnIndexOrThrow(ElementTable.FeedEntry.COLUMN_TEXT)));
+            Elements.add(currentElement);
+        }
+        cursor.close();
+
+        return Elements;
+    }
+    @Override
+    public List<ElementImage> readElementImage(int idTodolist) {
+        Cursor cursor = getElements(idTodolist);
+
+        List<Element> Elements = new ArrayList<>();
+        while(cursor.moveToNext()) {
+            long itemId = cursor.getLong(
+                    cursor.getColumnIndexOrThrow(ElementTable.FeedEntry._ID));
+            //itemIds.add(itemId);
+        }
+        cursor.close();
+
+        close();
+        return null;
+    }
+    @Override
+    public List<Element> readElementSon(int idTodolist) {
+
+        return null;
+    }
+
+    @Override
+    public void updateElement(Element element) {
+
+    }
+
+    @Override
+    public void deleteElement(Element element) {
+
+    }
+    public Cursor getElements(int idTodolist){
         openR();
 
         String[] projection = {
@@ -86,25 +131,7 @@ public class ElementDAO extends BaseDAO implements IElementDAO {
                 sortOrder                                 // The sort order
         );
 
-        List<Element> itemIds = new ArrayList<>();
-        /*while(cursor.moveToNext()) {
-            long itemId = cursor.getLong(
-                    cursor.getColumnIndexOrThrow(FeedEntry._ID));
-            itemIds.add(itemId);
-        }
-        cursor.close();*/
-
         close();
-        return null;
-    }
-
-    @Override
-    public void updateElement(Element element) {
-
-    }
-
-    @Override
-    public void deleteElement(Element element) {
-
+        return cursor;
     }
 }
