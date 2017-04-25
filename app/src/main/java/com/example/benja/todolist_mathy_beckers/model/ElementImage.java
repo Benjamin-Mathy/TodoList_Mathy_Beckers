@@ -13,8 +13,8 @@ public class ElementImage extends Element {
 
     private Image image;
 
-    public ElementImage(String text, Image image){
-        super(text);
+    public ElementImage(String text, int index, Image image){
+        super(text, index);
         this.image = image;
     }
 

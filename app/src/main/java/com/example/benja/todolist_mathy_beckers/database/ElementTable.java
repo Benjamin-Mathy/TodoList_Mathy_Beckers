@@ -20,7 +20,7 @@ public class ElementTable {
     private static final String DATABASE_CREATE = "create table "
             + FeedEntry.TABLE_NAME
             + "("
-            + FeedEntry.COLUMN_ID + " integer primary key autoincrement, "
+            + FeedEntry._ID + " integer primary key autoincrement, "
             + FeedEntry.COLUMN_TEXT + " text not null, "
             + FeedEntry.COLUMN_IMAGE + " text, "
             + FeedEntry.COLUMN_SON + " text, "
