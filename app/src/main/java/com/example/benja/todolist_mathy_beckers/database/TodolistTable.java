@@ -18,7 +18,7 @@ public class TodolistTable {
     private static final String DATABASE_CREATE = "create table "
             + FeedEntry.TABLE_NAME
             + "("
-            + FeedEntry.COLUMN_ID + " integer primary key, "
+            + FeedEntry._ID + " integer primary key, "
             + FeedEntry.COLUMN_NAME + " text not null, "
             + FeedEntry.COLUMN_COLOR + " text, "
             + ");";

@@ -20,7 +20,7 @@ public class NotificationTable {
     private static final String DATABASE_CREATE = "create table "
             + FeedEntry.TABLE_NAME
             + "("
-            + FeedEntry.COLUMN_ID + " integer primary key, "
+            + FeedEntry._ID + " integer primary key, "
             + FeedEntry.COLUMN_DATE + " text, "
             + FeedEntry.COLUMN_LONGITUDE + " real, "
             + FeedEntry.COLUMN_LATITUDE + " real, "

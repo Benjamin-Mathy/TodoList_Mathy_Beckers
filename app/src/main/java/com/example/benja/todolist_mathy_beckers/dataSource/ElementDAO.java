@@ -8,6 +8,7 @@ import com.example.benja.todolist_mathy_beckers.database.ElementTable;
 import com.example.benja.todolist_mathy_beckers.model.Element;
 import com.example.benja.todolist_mathy_beckers.model.ElementImage;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -61,8 +62,6 @@ public class ElementDAO extends BaseDAO implements IElementDAO {
     public List<Element> readElement(int idTodolist) {
         openR();
 
-// Define a projection that specifies which columns from the database
-// you will actually use after this query.
         String[] projection = {
                 ElementTable.FeedEntry._ID,
                 ElementTable.FeedEntry.COLUMN_TEXT,
@@ -71,11 +70,9 @@ public class ElementDAO extends BaseDAO implements IElementDAO {
                 ElementTable.FeedEntry.COLUMN_SON
         };
 
-// Filter results WHERE "title" = 'My Title'
         String selection = ElementTable.FeedEntry.COLUMN_FK_TODOLIST + " = ?";
         String[] selectionArgs = { Integer.toString(idTodolist) };
 
-// How you want the results sorted in the resulting Cursor
         String sortOrder =
                 ElementTable.FeedEntry.COLUMN_INDEX + " DESC";
 
@@ -88,6 +85,14 @@ public class ElementDAO extends BaseDAO implements IElementDAO {
                 null,                                     // don't filter by row groups
                 sortOrder                                 // The sort order
         );
+
+        List<Element> itemIds = new ArrayList<>();
+        /*while(cursor.moveToNext()) {
+            long itemId = cursor.getLong(
+                    cursor.getColumnIndexOrThrow(FeedEntry._ID));
+            itemIds.add(itemId);
+        }
+        cursor.close();*/
 
         close();
         return null;
