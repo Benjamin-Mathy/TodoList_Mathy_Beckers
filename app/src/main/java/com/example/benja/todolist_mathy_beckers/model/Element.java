@@ -9,16 +9,34 @@ package com.example.benja.todolist_mathy_beckers.model;
  */
 public class Element {
 
-    private int id;
+    private long id;
     private String text;
+    private int index;
 
-    public Element(String text){
+    public Element(String text, int index){
         this.text = text;
+        this.index = index;
     }
 
     public void editText(String text){
         this.text = text;
     }
 
-    public int getId(){return this.id;}
+    public long getId(){return this.id;}
+
+    public String getText() {
+        return text;
+    }
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 }

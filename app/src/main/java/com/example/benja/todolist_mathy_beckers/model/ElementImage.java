@@ -22,4 +22,7 @@ public class ElementImage extends Element {
         this.image = image;
     }
 
+    public Image getImage() {
+        return image;
+    }
 }
