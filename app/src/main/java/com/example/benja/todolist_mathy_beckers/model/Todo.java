@@ -15,16 +15,17 @@ import java.util.List;
 public class Todo<T extends Element>{
 
     private int id;
+    private TodoType type;
     private String name;
     private Colors color;
     private List<T> elements = new ArrayList<>();
-    //private Notification notification ?
+    private Notification notification;
 
-    public Todo(int id, String name, Colors color, List<T> elements){
+    public Todo(int id, TodoType type, String name, Colors color){
         this.id = id;
+        this.type = type;
         this.name = name;
         this.color = color;
-        this.elements = elements;
     }
 
     public int getId(){return this.id;}
@@ -52,4 +53,8 @@ public class Todo<T extends Element>{
     public T getElement(int index){
         return elements.get(index);
     }
+
+    public void setNotification(Notification notification){ this.notification = notification; }
+
+    public Notification getNotification(){return notification; }
 }

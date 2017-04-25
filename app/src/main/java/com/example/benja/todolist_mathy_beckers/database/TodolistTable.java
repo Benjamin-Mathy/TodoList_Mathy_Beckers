@@ -10,6 +10,7 @@ import android.provider.BaseColumns;
 public class TodolistTable {
     public static class FeedEntry implements BaseColumns {
         public static final String TABLE_NAME = "todolists";
+        public static final String COLUMN_TYPE = "type";
         public static final String COLUMN_ID = "id";
         public static final String COLUMN_NAME = "name";
         public static final String COLUMN_COLOR = "color";
@@ -19,6 +20,7 @@ public class TodolistTable {
             + FeedEntry.TABLE_NAME
             + "("
             + FeedEntry._ID + " integer primary key, "
+            + FeedEntry.COLUMN_TYPE + "text not null, "
             + FeedEntry.COLUMN_NAME + " text not null, "
             + FeedEntry.COLUMN_COLOR + " text, "
             + ");";
