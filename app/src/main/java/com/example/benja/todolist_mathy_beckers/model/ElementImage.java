@@ -1,6 +1,7 @@
 package com.example.benja.todolist_mathy_beckers.model;
 
 import android.media.Image;
+import android.net.Uri;
 
 /**
  * Created by Max on 10-04-17.
@@ -11,18 +12,18 @@ import android.media.Image;
  */
 public class ElementImage extends Element {
 
-    private Image image;
+    private Uri imageUri;
 
-    public ElementImage(String text, int index, Image image){
+    public ElementImage(String text, int index, Uri imageUri){
         super(text, index);
-        this.image = image;
+        this.imageUri = imageUri;
     }
 
-    public void editImage(Image image){
-        this.image = image;
+    public void editImage(Uri imageUri){
+        this.imageUri = imageUri;
     }
 
-    public Image getImage() {
-        return image;
+    public Uri getImage() {
+        return imageUri;
     }
 }
