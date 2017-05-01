@@ -3,11 +3,13 @@ package com.example.benja.todolist_mathy_beckers.dataSource;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.media.Image;
 
 import com.example.benja.todolist_mathy_beckers.database.ElementTable;
 import com.example.benja.todolist_mathy_beckers.model.Element;
 import com.example.benja.todolist_mathy_beckers.model.ElementImage;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,7 +49,6 @@ public class ElementDAO extends BaseDAO implements IElementDAO {
         values.put(ElementTable.FeedEntry.COLUMN_TEXT, element.getText());
         values.put(ElementTable.FeedEntry.COLUMN_INDEX, element.getIndex());
         values.put(ElementTable.FeedEntry.COLUMN_FK_TODOLIST, idTodo);
-        values.put(ElementTable.FeedEntry.COLUMN_INDEX, idTodo);
         values.put(ElementTable.FeedEntry.COLUMN_IMAGE, element.getImage().toString());
 
         long elementId = getDatabase().insert(ElementTable.FeedEntry.TABLE_NAME, null, values);
@@ -60,6 +61,7 @@ public class ElementDAO extends BaseDAO implements IElementDAO {
 
     @Override
     public List<Element> readElement(int idTodolist) {
+        openR();
         Cursor cursor = getElements(idTodolist);
 
         List<Element> Elements = new ArrayList<>();
@@ -71,21 +73,24 @@ public class ElementDAO extends BaseDAO implements IElementDAO {
             Elements.add(currentElement);
         }
         cursor.close();
-
+        close();
         return Elements;
     }
     @Override
     public List<ElementImage> readElementImage(int idTodolist) {
+        openR();
         Cursor cursor = getElements(idTodolist);
 
-        List<Element> Elements = new ArrayList<>();
+        List<ElementImage> Elements = new ArrayList<>();
         while(cursor.moveToNext()) {
-            long itemId = cursor.getLong(
-                    cursor.getColumnIndexOrThrow(ElementTable.FeedEntry._ID));
-            //itemIds.add(itemId);
+            ElementImage currentElement = new ElementImage();
+            currentElement.setId(cursor.getLong(cursor.getColumnIndexOrThrow(ElementTable.FeedEntry._ID)));
+            currentElement.setIndex(cursor.getInt(cursor.getColumnIndexOrThrow(ElementTable.FeedEntry.COLUMN_INDEX)));
+            currentElement.setText(cursor.getString(cursor.getColumnIndexOrThrow(ElementTable.FeedEntry.COLUMN_TEXT)));
+            currentElement.setImage(cursor.getString(cursor.getColumnIndexOrThrow(ElementTable.FeedEntry.COLUMN_IMAGE)));
+            Elements.add(currentElement);
         }
         cursor.close();
-
         close();
         return null;
     }
@@ -96,13 +101,54 @@ public class ElementDAO extends BaseDAO implements IElementDAO {
     }
 
     @Override
-    public void updateElement(Element element) {
+    public void updateElement(Element element, int idTodo) {
+        openW();
 
+        ContentValues values = new ContentValues();
+        values.put(ElementTable.FeedEntry.COLUMN_TEXT, element.getText());
+        values.put(ElementTable.FeedEntry.COLUMN_INDEX, element.getIndex());
+        values.put(ElementTable.FeedEntry.COLUMN_FK_TODOLIST, idTodo);
+
+        String selection = ElementTable.FeedEntry.COLUMN_ID + " LIKE ?";
+        String[] selectionArgs = { Long.toString(element.getId())};
+
+        int count = getDatabase().update(
+                ElementTable.FeedEntry.TABLE_NAME,
+                values,
+                selection,
+                selectionArgs);
+
+        close();
     }
+    @Override
+    public void updateElement(ElementImage element, int idTodo) {
+        openW();
+
+        ContentValues values = new ContentValues();
+        values.put(ElementTable.FeedEntry.COLUMN_TEXT, element.getText());
+        values.put(ElementTable.FeedEntry.COLUMN_INDEX, element.getIndex());
+        values.put(ElementTable.FeedEntry.COLUMN_FK_TODOLIST, idTodo);
+        values.put(ElementTable.FeedEntry.COLUMN_IMAGE, element.getImage().toString());
+
+        String selection = ElementTable.FeedEntry.COLUMN_ID + " LIKE ?";
+        String[] selectionArgs = { Long.toString(element.getId())};
+
+        int count = getDatabase().update(
+                ElementTable.FeedEntry.TABLE_NAME,
+                values,
+                selection,
+                selectionArgs);
+
+        close();
+    }
+
 
     @Override
     public void deleteElement(Element element) {
+        String selection = ElementTable.FeedEntry.COLUMN_ID + " LIKE ?";
+        String[] selectionArgs = { Long.toString(element.getId())};
 
+        getDatabase().delete(ElementTable.FeedEntry.TABLE_NAME, selection, selectionArgs);
     }
     public Cursor getElements(int idTodolist){
         openR();

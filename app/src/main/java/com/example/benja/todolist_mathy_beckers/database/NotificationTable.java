@@ -10,7 +10,7 @@ import android.provider.BaseColumns;
 public class NotificationTable {
     public static class FeedEntry implements BaseColumns {
         public static final String TABLE_NAME = "notifications";
-        public static final String COLUMN_ID = "id";
+        public static final String _ID = "id";
         public static final String COLUMN_DATE = "date";
         public static final String COLUMN_LONGITUDE = "longitude";
         public static final String COLUMN_LATITUDE = "latitude";
@@ -21,7 +21,7 @@ public class NotificationTable {
             + FeedEntry.TABLE_NAME
             + "("
             + FeedEntry._ID + " integer primary key, "
-            + FeedEntry.COLUMN_DATE + " text, "
+            + FeedEntry.COLUMN_DATE + " datetime default current_timestramp, "
             + FeedEntry.COLUMN_LONGITUDE + " real, "
             + FeedEntry.COLUMN_LATITUDE + " real, "
             + FeedEntry.COLUMN_FK_TODOLIST + " integer, "

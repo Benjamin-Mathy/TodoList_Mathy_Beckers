@@ -1,6 +1,9 @@
 package com.example.benja.todolist_mathy_beckers.model;
 
 import android.media.Image;
+import android.widget.ImageView;
+
+import java.io.File;
 
 /**
  * Created by Max on 10-04-17.
@@ -11,18 +14,26 @@ import android.media.Image;
  */
 public class ElementImage extends Element {
 
-    private Image image;
+    private File image;
 
-    public ElementImage(String text, int index, Image image){
+    public ElementImage(){
+
+    }
+
+    public ElementImage(String text, int index, File image){
         super(text, index);
         this.image = image;
     }
 
-    public void editImage(Image image){
+    public void editImage(File image){
         this.image = image;
     }
 
-    public Image getImage() {
+    public File getImage() {
         return image;
+    }
+
+    public void setImage(String image) {
+        this.image = new File(image);
     }
 }

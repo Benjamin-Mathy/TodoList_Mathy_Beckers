@@ -40,6 +40,17 @@
         </activity>
 
         <activity
+            android:name=".view.MapActivity"
+            android:label="2Dew - Map"
+            android:parentActivityName=".view.MainActivity">
+
+            <!-- Metadata pour le support des versions antérieures -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.MainActivity" />
+        </activity>
+
+        <activity
             android:name=".view.TodoTextActivity"
             android:label="2Dew - Text Todolist"
             android:parentActivityName=".view.MainActivity">

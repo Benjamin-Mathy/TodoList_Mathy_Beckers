@@ -13,9 +13,10 @@ public interface IElementDAO {
 
     long createElement(Element element, int idTodo);
     long createElement(ElementImage element, int idTodo);
-    List<Element> readElement(int idTodolist);
-    List<ElementImage> readElementImage(int idTodolist);
-    List<Element> readElementSon(int idTodolist);
-    void updateElement(Element element);
+    List<Element> readElement(int idTodo);
+    List<ElementImage> readElementImage(int idTodo);
+    List<Element> readElementSon(int idTodo);
+    void updateElement(Element element, int idTodo);
+    void updateElement(ElementImage element, int idTodo);
     void deleteElement(Element element);
 }

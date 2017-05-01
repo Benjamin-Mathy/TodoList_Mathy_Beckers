@@ -26,7 +26,7 @@ public class MainPresenter implements IMainPresenter {
         //TODO : Appeller BD
         //Version statique pour creation affichage.
         List<Todo> l = new ArrayList<>();
-        l.add(new Todo(0, "Liste A", Colors.GREEN, null));
+        /*l.add(new Todo(0, "Liste A", Colors.GREEN, null));
         l.add(new Todo(1, "Liste B", Colors.BLUE, null));
         l.add(new Todo(2, "Liste C", Colors.GREY, null));
         l.add(new Todo(3, "Liste D", Colors.ORANGE, null));
@@ -34,7 +34,7 @@ public class MainPresenter implements IMainPresenter {
         l.add(new Todo(5, "Liste F", Colors.RED, null));
         l.add(new Todo(6, "Liste G", Colors.YELLOW, null));
         l.add(new Todo(7, "Liste H", Colors.GREEN, null));
-        l.add(new Todo(8, "Liste I", Colors.BLUE, null));
+        l.add(new Todo(8, "Liste I", Colors.BLUE, null));*/
 
         return l;
     }

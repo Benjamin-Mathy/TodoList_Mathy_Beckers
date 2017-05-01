@@ -1,6 +1,7 @@
 package com.example.benja.todolist_mathy_beckers.model;
 
-import java.util.Date;
+
+import java.sql.Date;
 
 /**
  * Created by Max on 18-04-17.

@@ -64,18 +64,19 @@
             android:elevation="2dp" />
 
         <Button
-            android:background="@drawable/round_button"
-            android:drawableTop="@drawable/ic_mic_24dp"
-            android:paddingTop="15dp"
+            android:id="@+id/soundList"
+            android:onClick="SoundButtonclicked"
             android:layout_width="55dp"
             android:layout_height="55dp"
-
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginEnd="15dp"
+
             android:layout_marginBottom="20dp"
-            android:id="@+id/soundList"
-            android:elevation="2dp" />
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/round_button"
+            android:drawableTop="@drawable/ic_mic_24dp"
+            android:elevation="2dp"
+            android:paddingTop="15dp" />
 
     </RelativeLayout>
 

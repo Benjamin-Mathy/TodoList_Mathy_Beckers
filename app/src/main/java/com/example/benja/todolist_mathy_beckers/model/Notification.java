@@ -5,7 +5,11 @@ package com.example.benja.todolist_mathy_beckers.model;
  */
 
 public abstract class Notification {
-    private int id;
+    private long id;
 
-    public int getId(){return this.id;}
+    public long getId(){return this.id;}
+
+    public void setId(long id) {
+        this.id = id;
+    }
 }
