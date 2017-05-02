@@ -22,4 +22,13 @@ public enum Colors {
     public String toString(){
         return this.color;
     }
+
+    public static Colors valueFor(String text) {
+        for (Colors color : values()) {
+            if (color.toString().equals(text)) {
+                return color;
+            }
+        }
+        return null;
+    }
 }
