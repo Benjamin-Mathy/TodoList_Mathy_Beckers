@@ -14,21 +14,24 @@ import java.util.List;
  */
 public class Todo<T extends Element>{
 
-    private int id;
+    private long id;
     private TodoType type;
     private String name;
     private Colors color;
     private List<T> elements = new ArrayList<>();
-    private Notification notification;
+    private NotificationTime notificationTime;
+    private NotificationGPS notificationGps;
+    
+    public Todo() {}
 
-    public Todo(int id, TodoType type, String name, Colors color){
+    public Todo(long id, TodoType type, String name, Colors color){
         this.id = id;
         this.type = type;
         this.name = name;
         this.color = color;
     }
 
-    public int getId(){return this.id;}
+    public long getId(){return this.id;}
 
     public String getName(){return this.name;}
 
@@ -36,8 +39,20 @@ public class Todo<T extends Element>{
 
     public TodoType getType(){return this.type;}
 
-    public void rename(String name){
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setType(TodoType type) {
+        this.type = type;
+    }
+
+    public void setName(String name) {
         this.name = name;
+    }
+
+    public void setColor(Colors color) {
+        this.color = color;
     }
 
     public void add(T element){
@@ -56,7 +71,23 @@ public class Todo<T extends Element>{
         return elements.get(index);
     }
 
-    public void setNotification(Notification notification){ this.notification = notification; }
+    public void setElements(List<T> elements) {
+        this.elements = elements;
+    }
 
-    public Notification getNotification(){return notification; }
+    public NotificationTime getNotificationTime() {
+        return notificationTime;
+    }
+
+    public void setNotificationTime(NotificationTime notificationTime) {
+        this.notificationTime = notificationTime;
+    }
+
+    public NotificationGPS getNotificationGps() {
+        return notificationGps;
+    }
+
+    public void setNotificationGps(NotificationGPS notificationGps) {
+        this.notificationGps = notificationGps;
+    }
 }

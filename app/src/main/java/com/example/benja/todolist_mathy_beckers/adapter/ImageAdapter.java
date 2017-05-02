@@ -2,6 +2,7 @@ package com.example.benja.todolist_mathy_beckers.adapter;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,7 +56,7 @@ public class ImageAdapter extends BaseAdapter {
         v.setTag(elements.get(position));
 
         ImageView iv = (ImageView)v.findViewById(R.id.elementImage);
-        iv.setImageURI(elements.get(position).getImage());
+        iv.setImageURI(Uri.parse(elements.get(position).getImage()));
         return v;
     }
 }

@@ -14,8 +14,8 @@ public interface INotificationDAO {
 
     long createNotification(NotificationTime notification, int idTodo);
     long createNotification(NotificationGPS notification, int idTodo);
-    List<NotificationTime> readNotificationTime(int idTodolist);
-    List<NotificationGPS> readNotificationGPS(int idTodolist);
+    NotificationTime readNotificationTime(int idTodolist);
+    NotificationGPS readNotificationGPS(int idTodolist);
     void updateNotification(NotificationTime notification, int idTodo);
     void updateNotification(NotificationGPS notification, int idTodo);
     void deleteNotification(Notification notification);
