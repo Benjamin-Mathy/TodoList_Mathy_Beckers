@@ -33,6 +33,8 @@ public class TodoTextActivity extends AppCompatActivity implements ITodoTextActi
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_back_24dp);
         ActionBar actionBar = getSupportActionBar();
     }
 

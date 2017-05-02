@@ -16,4 +16,6 @@ public interface IMainPresenter {
     void addTodo(TodoType type);
 
     int getLastTodoId();
+
+    void removeTodo(Todo todo);
 }

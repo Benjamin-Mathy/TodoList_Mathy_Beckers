@@ -49,5 +49,8 @@ public class MainPresenter implements IMainPresenter {
         return maxId;
     }
 
-
+    @Override
+    public void removeTodo(Todo todo) {
+        todoDAO.deleteTodolist(todo);
+    }
 }
