@@ -14,26 +14,26 @@ import java.io.File;
  */
 public class ElementImage extends Element {
 
-    private File image;
+    private String image;
 
     public ElementImage(){
 
     }
 
-    public ElementImage(String text, int index, File image){
+    public ElementImage(String text, int index, String image){
         super(text, index);
         this.image = image;
     }
 
-    public void editImage(File image){
+    public void editImage(String image){
         this.image = image;
     }
 
-    public File getImage() {
+    public String getImage() {
         return image;
     }
 
     public void setImage(String image) {
-        this.image = new File(image);
+        this.image = new String(image);
     }
 }

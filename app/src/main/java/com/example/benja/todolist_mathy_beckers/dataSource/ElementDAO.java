@@ -49,7 +49,7 @@ public class ElementDAO extends BaseDAO implements IElementDAO {
         values.put(ElementTable.FeedEntry.COLUMN_TEXT, element.getText());
         values.put(ElementTable.FeedEntry.COLUMN_INDEX, element.getIndex());
         values.put(ElementTable.FeedEntry.COLUMN_FK_TODOLIST, idTodo);
-        values.put(ElementTable.FeedEntry.COLUMN_IMAGE, element.getImage().toString());
+        values.put(ElementTable.FeedEntry.COLUMN_IMAGE, element.getImage());
 
         long elementId = getDatabase().insert(ElementTable.FeedEntry.TABLE_NAME, null, values);
 
@@ -128,7 +128,7 @@ public class ElementDAO extends BaseDAO implements IElementDAO {
         values.put(ElementTable.FeedEntry.COLUMN_TEXT, element.getText());
         values.put(ElementTable.FeedEntry.COLUMN_INDEX, element.getIndex());
         values.put(ElementTable.FeedEntry.COLUMN_FK_TODOLIST, idTodo);
-        values.put(ElementTable.FeedEntry.COLUMN_IMAGE, element.getImage().toString());
+        values.put(ElementTable.FeedEntry.COLUMN_IMAGE, element.getImage());
 
         String selection = ElementTable.FeedEntry.COLUMN_ID + " LIKE ?";
         String[] selectionArgs = { Long.toString(element.getId())};
