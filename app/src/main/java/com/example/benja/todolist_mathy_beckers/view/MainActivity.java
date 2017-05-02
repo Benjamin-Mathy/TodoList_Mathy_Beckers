@@ -81,6 +81,7 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
         final int position = todos.getPositionForView((View) view.getParent());
         presenter.removeTodo(((Todo)todos.getItemAtPosition(position)));
         onResume();
+        recreate();
     }
 
 
