@@ -54,7 +54,6 @@ public class ImageAdapter extends BaseAdapter {
         TextView tv = (TextView)v.findViewById(R.id.todoName);
         tv.setText(elements.get(position).getText());
         v.setTag(elements.get(position));
-
         ImageView iv = (ImageView)v.findViewById(R.id.elementImage);
         iv.setImageURI(Uri.parse(elements.get(position).getImage()));
         return v;

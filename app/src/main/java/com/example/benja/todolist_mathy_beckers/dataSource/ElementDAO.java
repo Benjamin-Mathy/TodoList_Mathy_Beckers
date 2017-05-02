@@ -18,14 +18,13 @@ import java.util.List;
  */
 
 public class ElementDAO extends BaseDAO implements IElementDAO {
-    protected ElementDAO(Context _context) {
+    public ElementDAO(Context _context) {
         super(_context);
     }
 
     @Override
     public long createElement(Element element, int idTodo) {
         openW();
-
         ContentValues values = new ContentValues();
 
         //values.put(ElementTable.FeedEntry._ID, element.getId());
@@ -150,6 +149,7 @@ public class ElementDAO extends BaseDAO implements IElementDAO {
 
         getDatabase().delete(ElementTable.FeedEntry.TABLE_NAME, selection, selectionArgs);
     }
+
     public Cursor getElements(int idTodolist){
         openR();
 

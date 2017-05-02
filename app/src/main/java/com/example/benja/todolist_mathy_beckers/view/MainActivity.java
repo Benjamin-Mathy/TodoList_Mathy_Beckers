@@ -12,6 +12,8 @@ import android.widget.ListView;
 
 import com.example.benja.todolist_mathy_beckers.R;
 import com.example.benja.todolist_mathy_beckers.adapter.TodosAdapter;
+import com.example.benja.todolist_mathy_beckers.dataSource.TodolistDAO;
+import com.example.benja.todolist_mathy_beckers.model.TodoType;
 import com.example.benja.todolist_mathy_beckers.presenter.IMainPresenter;
 import com.example.benja.todolist_mathy_beckers.presenter.MainPresenter;
 
@@ -20,7 +22,7 @@ import static android.provider.AlarmClock.EXTRA_MESSAGE;
 public class MainActivity extends AppCompatActivity implements IMainActivity {
 
     private TodosAdapter adapter;
-    private IMainPresenter presenter = new MainPresenter(this);
+    private IMainPresenter presenter = new MainPresenter(this, new TodolistDAO(this));
 
     private ListView todos;
 
@@ -47,7 +49,14 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
 
     public void SoundButtonclicked(View view){
         Intent intent = new Intent(this, MapActivity.class);
-        intent.putExtra(EXTRA_MESSAGE, "test MapActivity");
+        intent.putExtra(EXTRA_MESSAGE, "test");
+        startActivity(intent);
+    }
+
+    public void NewTextList(View view){
+        presenter.addTodo(TodoType.TEXT);
+        Intent intent = new Intent(this, TodoTextActivity.class);
+        intent.putExtra(EXTRA_MESSAGE, presenter.getLastTodoId());
         startActivity(intent);
     }
 

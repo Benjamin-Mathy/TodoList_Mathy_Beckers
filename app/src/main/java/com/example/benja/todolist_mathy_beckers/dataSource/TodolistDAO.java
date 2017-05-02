@@ -22,8 +22,10 @@ import java.util.List;
  */
 
 public class TodolistDAO extends BaseDAO implements ITodolistDAO {
+
     Context context;
-    protected TodolistDAO(Context _context) {
+
+    public TodolistDAO(Context _context) {
         super(_context);
         context=_context;
     }
