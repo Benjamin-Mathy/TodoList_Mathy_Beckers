@@ -10,17 +10,17 @@ import android.provider.BaseColumns;
 public class ElementTable {
     public static class FeedEntry implements BaseColumns {
         public static final String TABLE_NAME = "elements";
-        public static final String COLUMN_ID = "id";
+        public static final String COLUMN_ID = "rowid";
         public static final String COLUMN_TEXT = "text";
         public static final String COLUMN_IMAGE = "image";
         public static final String COLUMN_SON = "son";
-        public static final String COLUMN_INDEX = "index";
+        public static final String COLUMN_INDEX = "position";
         public static final String COLUMN_FK_TODOLIST = "todolist";
     }
     private static final String DATABASE_CREATE = "create table "
             + FeedEntry.TABLE_NAME
             + "("
-            + FeedEntry._ID + " integer primary key autoincrement, "
+            + FeedEntry._ID + " integer primary key, "
             + FeedEntry.COLUMN_TEXT + " text not null, "
             + FeedEntry.COLUMN_IMAGE + " text, "
             + FeedEntry.COLUMN_SON + " text, "
@@ -33,7 +33,6 @@ public class ElementTable {
             "DROP TABLE IF EXISTS " + FeedEntry.TABLE_NAME;
 
     public static void onCreate(SQLiteDatabase database) {
-
         database.execSQL(DATABASE_CREATE);
 
     }

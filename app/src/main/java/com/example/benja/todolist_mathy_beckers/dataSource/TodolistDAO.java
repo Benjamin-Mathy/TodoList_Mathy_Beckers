@@ -115,7 +115,7 @@ public class TodolistDAO extends BaseDAO implements ITodolistDAO {
         openR();
 
         String[] projection = {
-                TodolistTable.FeedEntry.COLUMN_ID,
+                TodolistTable.FeedEntry._ID,
                 TodolistTable.FeedEntry.COLUMN_NAME,
                 TodolistTable.FeedEntry.COLUMN_COLOR,
                 TodolistTable.FeedEntry.COLUMN_TYPE
@@ -150,12 +150,13 @@ public class TodolistDAO extends BaseDAO implements ITodolistDAO {
 
 
         String[] projection = {
+                TodolistTable.FeedEntry._ID,
                 TodolistTable.FeedEntry.COLUMN_NAME,
                 TodolistTable.FeedEntry.COLUMN_COLOR,
                 TodolistTable.FeedEntry.COLUMN_TYPE
         };
 
-        String selection = TodolistTable.FeedEntry.COLUMN_ID + " = ?";
+        String selection = TodolistTable.FeedEntry._ID + " = ?";
         String[] selectionArgs = { Integer.toString(idTodolist) };
 
         Cursor cursor = getDatabase().query(

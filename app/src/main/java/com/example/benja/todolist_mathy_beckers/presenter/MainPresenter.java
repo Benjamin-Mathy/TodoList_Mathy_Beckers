@@ -28,6 +28,7 @@ public class MainPresenter implements IMainPresenter {
     @Override
     public List<Todo> getAllTodos() {
         return todoDAO.getTodolists();
+        //return new ArrayList<>();
     }
 
     @Override

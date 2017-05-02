@@ -11,7 +11,7 @@ public class TodolistTable {
     public static class FeedEntry implements BaseColumns {
         public static final String TABLE_NAME = "todolists";
         public static final String COLUMN_TYPE = "type";
-        public static final String COLUMN_ID = "id";
+        public static final String _ID = "rowid";
         public static final String COLUMN_NAME = "name";
         public static final String COLUMN_COLOR = "color";
     }
@@ -19,17 +19,16 @@ public class TodolistTable {
     private static final String DATABASE_CREATE = "create table "
             + FeedEntry.TABLE_NAME
             + "("
-            + FeedEntry._ID + " integer primary key, "
-            + FeedEntry.COLUMN_TYPE + "text not null, "
+            + FeedEntry._ID + "integer primary key,"
+            + FeedEntry.COLUMN_TYPE + " text not null,"
             + FeedEntry.COLUMN_NAME + " text not null, "
-            + FeedEntry.COLUMN_COLOR + " text, "
+            + FeedEntry.COLUMN_COLOR + " text "
             + ");";
 
     private static final String SQL_DELETE_ENTRIES =
             "DROP TABLE IF EXISTS " + FeedEntry.TABLE_NAME;
 
     public static void onCreate(SQLiteDatabase database) {
-
         database.execSQL(DATABASE_CREATE);
 
     }
@@ -44,6 +43,6 @@ public class TodolistTable {
         return FeedEntry.TABLE_NAME;
     }
     public static String GetIdName(){
-        return FeedEntry.COLUMN_ID;
+        return FeedEntry._ID;
     }
 }

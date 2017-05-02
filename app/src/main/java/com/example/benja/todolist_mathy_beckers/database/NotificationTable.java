@@ -10,7 +10,7 @@ import android.provider.BaseColumns;
 public class NotificationTable {
     public static class FeedEntry implements BaseColumns {
         public static final String TABLE_NAME = "notifications";
-        public static final String _ID = "id";
+        public static final String _ID = "rowid";
         public static final String COLUMN_DATE = "date";
         public static final String COLUMN_LONGITUDE = "longitude";
         public static final String COLUMN_LATITUDE = "latitude";
@@ -32,7 +32,6 @@ public class NotificationTable {
             "DROP TABLE IF EXISTS " + FeedEntry.TABLE_NAME;
 
     public static void onCreate(SQLiteDatabase database) {
-
         database.execSQL(DATABASE_CREATE);
 
     }
