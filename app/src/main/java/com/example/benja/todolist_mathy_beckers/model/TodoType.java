@@ -18,4 +18,13 @@ public enum TodoType {
     public String toString(){
         return this.todoType;
     }
+
+    public static TodoType valueFor(String text) {
+        for (TodoType type : values()) {
+            if (type.toString().equals(text)) {
+                return type;
+            }
+        }
+        return null;
+    }
 }

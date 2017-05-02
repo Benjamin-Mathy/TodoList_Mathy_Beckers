@@ -62,8 +62,8 @@ public class TodolistDAO extends BaseDAO implements ITodolistDAO {
 
         todo.setId(cursor.getLong(cursor.getColumnIndexOrThrow(TodolistTable.FeedEntry._ID)));
         todo.setName(cursor.getString(cursor.getColumnIndexOrThrow(TodolistTable.FeedEntry.COLUMN_NAME)));
-        todo.setColor(Colors.valueOf(cursor.getString(cursor.getColumnIndexOrThrow(TodolistTable.FeedEntry.COLUMN_COLOR))));
-        todo.setType(TodoType.valueOf(cursor.getString(cursor.getColumnIndexOrThrow(TodolistTable.FeedEntry.COLUMN_TYPE))));
+        todo.setColor(Colors.valueFor(cursor.getString(cursor.getColumnIndexOrThrow(TodolistTable.FeedEntry.COLUMN_COLOR))));
+        todo.setType(TodoType.valueFor(cursor.getString(cursor.getColumnIndexOrThrow(TodolistTable.FeedEntry.COLUMN_TYPE))));
         todo.setNotificationTime(notificationDAO.readNotificationTime(idTodolist));
         todo.setNotificationGps(notificationDAO.readNotificationGPS(idTodolist));
         for (Element elem: elementDAO.readElement(idTodolist)) {
@@ -137,7 +137,7 @@ public class TodolistDAO extends BaseDAO implements ITodolistDAO {
             todo.setId(cursor.getLong(cursor.getColumnIndexOrThrow(TodolistTable.FeedEntry._ID)));
             todo.setName(cursor.getString(cursor.getColumnIndexOrThrow(TodolistTable.FeedEntry.COLUMN_NAME)));
             todo.setColor(Colors.valueFor(cursor.getString(cursor.getColumnIndexOrThrow(TodolistTable.FeedEntry.COLUMN_COLOR))));
-            todo.setType(TodoType.valueOf(cursor.getString(cursor.getColumnIndexOrThrow(TodolistTable.FeedEntry.COLUMN_TYPE))));
+            todo.setType(TodoType.valueFor(cursor.getString(cursor.getColumnIndexOrThrow(TodolistTable.FeedEntry.COLUMN_TYPE))));
             todolists.add(todo);
         }
 

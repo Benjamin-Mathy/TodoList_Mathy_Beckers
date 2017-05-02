@@ -24,7 +24,7 @@ public class ElementTable {
             + FeedEntry.COLUMN_TEXT + " text not null, "
             + FeedEntry.COLUMN_IMAGE + " text, "
             + FeedEntry.COLUMN_SON + " text, "
-            + FeedEntry.COLUMN_INDEX + " integer not null, "
+            + FeedEntry.COLUMN_INDEX + " position not null, "
             + FeedEntry.COLUMN_FK_TODOLIST + " integer, "
             + "foreign key("+FeedEntry.COLUMN_FK_TODOLIST+") references "+TodolistTable.GetTableName()+"("+TodolistTable.GetIdName()+")"
             + ");";
