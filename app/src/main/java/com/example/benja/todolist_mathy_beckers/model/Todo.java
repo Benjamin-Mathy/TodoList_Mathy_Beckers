@@ -34,6 +34,8 @@ public class Todo<T extends Element>{
 
     public Colors getColor(){return this.color;}
 
+    public TodoType getType(){return this.type;}
+
     public void rename(String name){
         this.name = name;
     }

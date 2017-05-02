@@ -8,7 +8,7 @@ import com.example.benja.todolist_mathy_beckers.model.Todo;
 
 public interface ITodolistDAO {
 
-    void createTodolist(Todo todo);
+    long createTodolist(Todo todo);
     Todo readTodolist(int idTodolist);
     void updateTodolist(Todo todo);
     void deleteTodolist(Todo todo);
