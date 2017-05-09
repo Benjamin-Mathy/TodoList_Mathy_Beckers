@@ -53,6 +53,7 @@
         <Button
             android:background="@drawable/round_button"
             android:drawableTop="@drawable/ic_camera_alt_24dp"
+            android:onClick="newImageList"
             android:paddingTop="15dp"
             android:layout_width="55dp"
             android:layout_height="55dp"

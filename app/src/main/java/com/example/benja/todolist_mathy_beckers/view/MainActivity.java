@@ -77,6 +77,13 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
         startActivity(intent);
     }
 
+    public void newImageList(View view){
+        presenter.addTodo(TodoType.IMAGE);
+        Intent intent = new Intent(this, TodoTextActivity.class);
+        intent.putExtra(EXTRA_MESSAGE, presenter.getLastTodoId());
+        startActivity(intent);
+    }
+
     public void removeTodo(View view){
         final int position = todos.getPositionForView((View) view.getParent());
         presenter.removeTodo(((Todo)todos.getItemAtPosition(position)));
