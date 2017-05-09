@@ -104,10 +104,14 @@ public class TodolistDAO extends BaseDAO implements ITodolistDAO {
 
     @Override
     public void deleteTodolist(Todo todo) {
+        openW();
+
         String selection = TodolistTable.FeedEntry._ID + " LIKE ?";
         String[] selectionArgs = { Long.toString(todo.getId())};
 
         getDatabase().delete(TodolistTable.FeedEntry.TABLE_NAME, selection, selectionArgs);
+
+        close();
     }
 
     @Override
