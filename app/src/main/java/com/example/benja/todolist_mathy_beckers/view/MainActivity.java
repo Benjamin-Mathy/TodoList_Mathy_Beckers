@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
         Intent intent = new Intent(this, TodoTextActivity.class);
         intent.putExtra("id", (int)id);
         startActivity(intent);
+
     }
 
     @Override
