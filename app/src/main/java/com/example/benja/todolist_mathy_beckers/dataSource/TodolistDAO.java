@@ -4,16 +4,12 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 
-import com.example.benja.todolist_mathy_beckers.database.ElementTable;
-import com.example.benja.todolist_mathy_beckers.database.NotificationTable;
 import com.example.benja.todolist_mathy_beckers.database.TodolistTable;
 import com.example.benja.todolist_mathy_beckers.model.Colors;
 import com.example.benja.todolist_mathy_beckers.model.Element;
-import com.example.benja.todolist_mathy_beckers.model.NotificationTime;
 import com.example.benja.todolist_mathy_beckers.model.Todo;
 import com.example.benja.todolist_mathy_beckers.model.TodoType;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
