@@ -55,6 +55,8 @@ public class TodolistDAO extends BaseDAO implements ITodolistDAO {
 
         Todo todo = new Todo();
 
+        cursor.moveToFirst();
+
         todo.setId(cursor.getLong(cursor.getColumnIndexOrThrow(TodolistTable.FeedEntry._ID)));
         todo.setName(cursor.getString(cursor.getColumnIndexOrThrow(TodolistTable.FeedEntry.COLUMN_NAME)));
         todo.setColor(Colors.valueFor(cursor.getString(cursor.getColumnIndexOrThrow(TodolistTable.FeedEntry.COLUMN_COLOR))));

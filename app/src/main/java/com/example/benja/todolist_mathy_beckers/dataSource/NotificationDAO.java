@@ -56,24 +56,24 @@ public class NotificationDAO extends BaseDAO implements INotificationDAO {
 
     @Override
     public NotificationTime readNotificationTime(int idTodolist) {
-        openR();
+        //openR();
         Cursor cursor = getNotifications(idTodolist);
-
+        cursor.moveToFirst();
 
             NotificationTime currentNotification = new NotificationTime();
             currentNotification.setId(cursor.getLong(cursor.getColumnIndexOrThrow(NotificationTable.FeedEntry._ID)));
             currentNotification.setDate(new Date(cursor.getLong(cursor.getColumnIndexOrThrow(NotificationTable.FeedEntry.COLUMN_DATE))));
 
         cursor.close();
-        close();
+        //close();
         return currentNotification;
     }
 
     @Override
     public NotificationGPS readNotificationGPS(int idTodolist) {
-        openR();
+        //openR();
         Cursor cursor = getNotifications(idTodolist);
-
+        cursor.moveToFirst();
 
             NotificationGPS currentNotification = new NotificationGPS();
             currentNotification.setId(cursor.getLong(cursor.getColumnIndexOrThrow(NotificationTable.FeedEntry._ID)));
@@ -81,7 +81,7 @@ public class NotificationDAO extends BaseDAO implements INotificationDAO {
             currentNotification.setLongitude(cursor.getLong(cursor.getColumnIndexOrThrow(NotificationTable.FeedEntry.COLUMN_LONGITUDE)));
 
         cursor.close();
-        close();
+        //close();
         return currentNotification;
     }
 
@@ -134,7 +134,7 @@ public class NotificationDAO extends BaseDAO implements INotificationDAO {
         getDatabase().delete(NotificationTable.FeedEntry.TABLE_NAME, selection, selectionArgs);
     }
     public Cursor getNotifications(int idTodolist){
-        openR();
+        //openR();
 
         String[] projection = {
                 NotificationTable.FeedEntry._ID,
@@ -156,7 +156,7 @@ public class NotificationDAO extends BaseDAO implements INotificationDAO {
                 null                                      // The sort order
         );
 
-        close();
+        //close();
         return cursor;
     }
 }
