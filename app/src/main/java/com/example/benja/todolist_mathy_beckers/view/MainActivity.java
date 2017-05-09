@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
 
     public void newImageList(View view){
         presenter.addTodo(TodoType.IMAGE);
-        Intent intent = new Intent(this, TodoTextActivity.class);
+        Intent intent = new Intent(this, TodoImageActivity.class);
         intent.putExtra(EXTRA_MESSAGE, presenter.getLastTodoId());
         startActivity(intent);
     }
