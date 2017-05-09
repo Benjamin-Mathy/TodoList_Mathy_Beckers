@@ -38,6 +38,10 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
 
+        createList();
+    }
+
+    public void createList(){
         todos = (ListView) findViewById(R.id.todos);
         adapter = new TodosAdapter(this, presenter.getAllTodos());
         todos.setAdapter(adapter);
@@ -45,16 +49,21 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
         todos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(MainActivity.super.getApplicationContext(), TodoTextActivity.class);
-                intent.putExtra(EXTRA_MESSAGE, ((Todo)parent.getItemAtPosition(position)).getId());
-                startActivity(intent);
+                createIntentForText(((Todo)parent.getItemAtPosition(position)).getId());
             }
         });
+    }
+
+    public void createIntentForText(long id){
+        Intent intent = new Intent(this, TodoTextActivity.class);
+        intent.putExtra("id", id);
+        startActivity(intent);
     }
 
     @Override
     public void onResume(){
         super.onResume();
+        createList();
     }
 
     @Override
@@ -73,14 +82,14 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
     public void newTextList(View view){
         presenter.addTodo(TodoType.TEXT);
         Intent intent = new Intent(this, TodoTextActivity.class);
-        intent.putExtra(EXTRA_MESSAGE, presenter.getLastTodoId());
+        intent.putExtra("id", presenter.getLastTodoId());
         startActivity(intent);
     }
 
     public void newImageList(View view){
         presenter.addTodo(TodoType.IMAGE);
         Intent intent = new Intent(this, TodoImageActivity.class);
-        intent.putExtra(EXTRA_MESSAGE, presenter.getLastTodoId());
+        intent.putExtra("id", presenter.getLastTodoId());
         startActivity(intent);
     }
 
@@ -88,7 +97,6 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
         final int position = todos.getPositionForView((View) view.getParent());
         presenter.removeTodo(((Todo)todos.getItemAtPosition(position)));
         onResume();
-        recreate();
     }
 
 
