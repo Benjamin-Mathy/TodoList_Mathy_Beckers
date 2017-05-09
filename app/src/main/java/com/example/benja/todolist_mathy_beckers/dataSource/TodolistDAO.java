@@ -50,7 +50,6 @@ public class TodolistDAO extends BaseDAO implements ITodolistDAO {
 
     @Override
     public Todo readTodolist(int idTodolist) {
-
         openR();
         NotificationDAO notificationDAO = new NotificationDAO(this.context);
         ElementDAO elementDAO = new ElementDAO(this.context);
@@ -136,6 +135,7 @@ public class TodolistDAO extends BaseDAO implements ITodolistDAO {
         );
 
         List<Todo> todolists = new ArrayList<>();
+
         while(cursor.moveToNext()) {
             Todo todo = new Todo();
             todo.setId(cursor.getLong(cursor.getColumnIndexOrThrow(TodolistTable.FeedEntry._ID)));
@@ -151,8 +151,6 @@ public class TodolistDAO extends BaseDAO implements ITodolistDAO {
     }
 
     public Cursor getTodo(int idTodolist){
-
-
         String[] projection = {
                 TodolistTable.FeedEntry._ID,
                 TodolistTable.FeedEntry.COLUMN_NAME,

@@ -20,9 +20,10 @@ public class TodoTextPresenter implements ITodoTextPresenter {
 
     int todoId;
 
-    public TodoTextPresenter(ITodoTextActivity view, IElementDAO dao){
+    public TodoTextPresenter(ITodoTextActivity view, IElementDAO elementDAO, ITodolistDAO todoDAO){
         this.view = view;
-        this.elementDAO = dao;
+        this.elementDAO = elementDAO;
+        this.todoDAO = todoDAO;
     }
 
     public void setTodoId(int id){

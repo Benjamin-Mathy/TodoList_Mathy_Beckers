@@ -30,7 +30,7 @@ import static android.provider.AlarmClock.EXTRA_MESSAGE;
 public class TodoTextActivity extends AppCompatActivity implements ITodoTextActivity {
 
     private TextAdapter adapter;
-    private ITodoTextPresenter presenter = new TodoTextPresenter(this, new ElementDAO(this));
+    private ITodoTextPresenter presenter = new TodoTextPresenter(this, new ElementDAO(this),new TodolistDAO(this));
 
     private ListView elements;
 
@@ -39,9 +39,7 @@ public class TodoTextActivity extends AppCompatActivity implements ITodoTextActi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_textlist);
 
-        Intent i = getIntent();
-        int id = getIntent().getIntExtra("id", -1);
-        presenter.setTodoId(id);
+        presenter.setTodoId(getIntent().getIntExtra("id", -1));
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
