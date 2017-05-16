@@ -2,8 +2,11 @@ package com.example.benja.todolist_mathy_beckers.presenter;
 
 import android.graphics.Color;
 
+import com.example.benja.todolist_mathy_beckers.dataSource.IElementDAO;
+import com.example.benja.todolist_mathy_beckers.dataSource.INotificationDAO;
 import com.example.benja.todolist_mathy_beckers.dataSource.ITodolistDAO;
 import com.example.benja.todolist_mathy_beckers.model.Colors;
+import com.example.benja.todolist_mathy_beckers.model.Element;
 import com.example.benja.todolist_mathy_beckers.model.Todo;
 import com.example.benja.todolist_mathy_beckers.model.TodoType;
 import com.example.benja.todolist_mathy_beckers.view.IMainActivity;
@@ -15,25 +18,24 @@ import java.util.List;
  * Created by Max on 13-04-17.
  */
 
-public class MainPresenter implements IMainPresenter {
+public class MainPresenter extends BasePresenter implements IMainPresenter{
 
     private IMainActivity view;
-    private ITodolistDAO todoDAO;
 
-    public MainPresenter(IMainActivity view, ITodolistDAO dao){
+    public MainPresenter(IMainActivity view, ITodolistDAO daoTodo, IElementDAO daoElem, INotificationDAO daoNotif){
+        super(daoTodo, daoElem, daoNotif);
         this.view = view;
-        this.todoDAO = dao;
     }
 
     @Override
     public List<Todo> getAllTodos() {
-        return todoDAO.getTodolists();
+        return getTodoDAO().getTodolists();
     }
 
     @Override
     public void addTodo(TodoType type) {
         Todo newTodo = new Todo(0, type, "New Todolist", Colors.BLUE);
-        todoDAO.createTodolist(newTodo);
+        getTodoDAO().createTodolist(newTodo);
     }
 
     @Override
@@ -50,6 +52,12 @@ public class MainPresenter implements IMainPresenter {
 
     @Override
     public void removeTodo(Todo todo) {
-        todoDAO.deleteTodolist(todo);
+        getNotificationDAO().deleteNotification(getNotificationDAO().readNotificationGPS((int) todo.getId()));
+        getNotificationDAO().deleteNotification(getNotificationDAO().readNotificationTime((int) todo.getId()));
+        List<Element> elements = getElementDAO().readElement((int) todo.getId());
+        for (Element e : elements) {
+            getElementDAO().deleteElement(e);
+        }
+        getTodoDAO().deleteTodolist(todo);
     }
 }

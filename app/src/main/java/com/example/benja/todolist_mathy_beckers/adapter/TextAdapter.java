@@ -47,8 +47,8 @@ public class TextAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View v = inflater.inflate(R.layout.imageelement_item, parent, false);
-        TextView tv = (TextView)v.findViewById(R.id.todoName);
+        View v = inflater.inflate(R.layout.textelement_item, parent, false);
+        TextView tv = (TextView)v.findViewById(R.id.elementName);
         tv.setText(elements.get(position).getText());
         v.setTag(elements.get(position));
         return v;

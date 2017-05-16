@@ -3,6 +3,7 @@ package com.example.benja.todolist_mathy_beckers.dataSource;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 
 import com.example.benja.todolist_mathy_beckers.database.NotificationTable;
 import com.example.benja.todolist_mathy_beckers.model.Notification;
@@ -18,7 +19,7 @@ import java.util.List;
  */
 
 public class NotificationDAO extends BaseDAO implements INotificationDAO {
-    protected NotificationDAO(Context _context) {
+    public NotificationDAO(Context _context) {
         super(_context);
     }
     @Override
@@ -56,33 +57,38 @@ public class NotificationDAO extends BaseDAO implements INotificationDAO {
 
     @Override
     public NotificationTime readNotificationTime(int idTodolist) {
-        //openR();
-        Cursor cursor = getNotifications(idTodolist);
-        cursor.moveToFirst();
+        openR();
 
+        Cursor cursor = getNotifications(idTodolist);
+
+        if( cursor != null && cursor.moveToFirst() ){
             NotificationTime currentNotification = new NotificationTime();
             currentNotification.setId(cursor.getLong(cursor.getColumnIndexOrThrow(NotificationTable.FeedEntry._ID)));
             currentNotification.setDate(new Date(cursor.getLong(cursor.getColumnIndexOrThrow(NotificationTable.FeedEntry.COLUMN_DATE))));
 
-        cursor.close();
-        //close();
-        return currentNotification;
+            cursor.close();
+            close();
+            return currentNotification;
+        }
+        return null;
     }
 
     @Override
     public NotificationGPS readNotificationGPS(int idTodolist) {
-        //openR();
+        openR();
         Cursor cursor = getNotifications(idTodolist);
-        cursor.moveToFirst();
 
+        if( cursor != null && cursor.moveToFirst() ){
             NotificationGPS currentNotification = new NotificationGPS();
             currentNotification.setId(cursor.getLong(cursor.getColumnIndexOrThrow(NotificationTable.FeedEntry._ID)));
             currentNotification.setLatitude(cursor.getLong(cursor.getColumnIndexOrThrow(NotificationTable.FeedEntry.COLUMN_LATITUDE)));
             currentNotification.setLongitude(cursor.getLong(cursor.getColumnIndexOrThrow(NotificationTable.FeedEntry.COLUMN_LONGITUDE)));
 
-        cursor.close();
-        //close();
-        return currentNotification;
+            cursor.close();
+            close();
+            return currentNotification;
+        }
+        return null;
     }
 
     @Override
@@ -128,14 +134,15 @@ public class NotificationDAO extends BaseDAO implements INotificationDAO {
 
     @Override
     public void deleteNotification(Notification notification) {
+        if(notification == null){
+            return;
+        }
         String selection = NotificationTable.FeedEntry._ID + " LIKE ?";
         String[] selectionArgs = { Long.toString(notification.getId())};
 
         getDatabase().delete(NotificationTable.FeedEntry.TABLE_NAME, selection, selectionArgs);
     }
     public Cursor getNotifications(int idTodolist){
-        //openR();
-
         String[] projection = {
                 NotificationTable.FeedEntry._ID,
                 NotificationTable.FeedEntry.COLUMN_DATE,
@@ -156,7 +163,6 @@ public class NotificationDAO extends BaseDAO implements INotificationDAO {
                 null                                      // The sort order
         );
 
-        //close();
         return cursor;
     }
 }

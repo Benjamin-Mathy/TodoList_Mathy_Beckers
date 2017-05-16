@@ -144,15 +144,17 @@ public class ElementDAO extends BaseDAO implements IElementDAO {
 
     @Override
     public void deleteElement(Element element) {
+        openW();
+
         String selection = ElementTable.FeedEntry.COLUMN_ID + " LIKE ?";
         String[] selectionArgs = { Long.toString(element.getId())};
 
         getDatabase().delete(ElementTable.FeedEntry.TABLE_NAME, selection, selectionArgs);
+
+        close();
     }
 
     public Cursor getElements(int idTodolist){
-        openR();
-
         String[] projection = {
                 ElementTable.FeedEntry._ID,
                 ElementTable.FeedEntry.COLUMN_TEXT,
@@ -177,7 +179,6 @@ public class ElementDAO extends BaseDAO implements IElementDAO {
                 sortOrder                                 // The sort order
         );
 
-        close();
         return cursor;
     }
 }

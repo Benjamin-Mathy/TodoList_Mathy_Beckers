@@ -26,7 +26,6 @@ public class TodolistDAO extends BaseDAO implements ITodolistDAO {
         context=_context;
     }
 
-
     @Override
     public long createTodolist(Todo todo) {
         openW();

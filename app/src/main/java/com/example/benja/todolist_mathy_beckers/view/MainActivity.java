@@ -14,6 +14,8 @@ import android.widget.ListView;
 
 import com.example.benja.todolist_mathy_beckers.R;
 import com.example.benja.todolist_mathy_beckers.adapter.TodosAdapter;
+import com.example.benja.todolist_mathy_beckers.dataSource.ElementDAO;
+import com.example.benja.todolist_mathy_beckers.dataSource.NotificationDAO;
 import com.example.benja.todolist_mathy_beckers.dataSource.TodolistDAO;
 import com.example.benja.todolist_mathy_beckers.model.Todo;
 import com.example.benja.todolist_mathy_beckers.model.TodoType;
@@ -25,7 +27,7 @@ import static android.provider.AlarmClock.EXTRA_MESSAGE;
 public class MainActivity extends AppCompatActivity implements IMainActivity {
 
     private TodosAdapter adapter;
-    private IMainPresenter presenter = new MainPresenter(this, new TodolistDAO(this));
+    private IMainPresenter presenter = new MainPresenter(this, new TodolistDAO(this), new ElementDAO(this), new NotificationDAO(this));
 
     private ListView todos;
 

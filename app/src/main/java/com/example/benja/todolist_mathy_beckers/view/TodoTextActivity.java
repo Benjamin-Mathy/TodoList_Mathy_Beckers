@@ -14,8 +14,10 @@ import com.example.benja.todolist_mathy_beckers.R;
 import com.example.benja.todolist_mathy_beckers.adapter.TextAdapter;
 import com.example.benja.todolist_mathy_beckers.adapter.TodosAdapter;
 import com.example.benja.todolist_mathy_beckers.dataSource.ElementDAO;
+import com.example.benja.todolist_mathy_beckers.dataSource.NotificationDAO;
 import com.example.benja.todolist_mathy_beckers.dataSource.TodolistDAO;
 import com.example.benja.todolist_mathy_beckers.model.Todo;
+import com.example.benja.todolist_mathy_beckers.model.TodoType;
 import com.example.benja.todolist_mathy_beckers.presenter.IMainPresenter;
 import com.example.benja.todolist_mathy_beckers.presenter.ITodoTextPresenter;
 import com.example.benja.todolist_mathy_beckers.presenter.MainPresenter;
@@ -30,7 +32,7 @@ import static android.provider.AlarmClock.EXTRA_MESSAGE;
 public class TodoTextActivity extends AppCompatActivity implements ITodoTextActivity {
 
     private TextAdapter adapter;
-    private ITodoTextPresenter presenter = new TodoTextPresenter(this, new ElementDAO(this),new TodolistDAO(this));
+    private ITodoTextPresenter presenter = new TodoTextPresenter(this, new TodolistDAO(this), new ElementDAO(this), new NotificationDAO(this));
 
     private ListView elements;
 
@@ -47,6 +49,12 @@ public class TodoTextActivity extends AppCompatActivity implements ITodoTextActi
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_back_24dp);
         ActionBar actionBar = getSupportActionBar();
 
+        createList();
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
         createList();
     }
 
@@ -67,5 +75,10 @@ public class TodoTextActivity extends AppCompatActivity implements ITodoTextActi
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
+    }
+
+    public void newElementTextList(View view){
+        presenter.addElement();
+        onResume();
     }
 }
