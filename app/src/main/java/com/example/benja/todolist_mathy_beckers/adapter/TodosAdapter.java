@@ -50,7 +50,6 @@ public class TodosAdapter extends BaseAdapter {
         View v = inflater.inflate(R.layout.todo_item, parent, false);
         TextView tv = (TextView)v.findViewById(R.id.todoName);
         tv.setText(todos.get(position).getName());
-        //TODO : P-e ici aussi pour mettre la couleur de la liste ?
         v.setTag(todos.get(position));
 
         LinearLayout rl = (LinearLayout)v.findViewById(R.id.todoItem);

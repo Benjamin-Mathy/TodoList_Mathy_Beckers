@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -48,8 +49,8 @@ public class TextAdapter extends BaseAdapter {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View v = inflater.inflate(R.layout.textelement_item, parent, false);
-        TextView tv = (TextView)v.findViewById(R.id.elementName);
-        tv.setText(elements.get(position).getText());
+        EditText ev = (EditText) v.findViewById(R.id.elementName);
+        ev.setText(elements.get(position).getText());
         v.setTag(elements.get(position));
         return v;
     }

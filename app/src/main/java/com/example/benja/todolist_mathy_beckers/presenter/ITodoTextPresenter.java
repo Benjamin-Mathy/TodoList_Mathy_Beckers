@@ -15,4 +15,8 @@ public interface ITodoTextPresenter {
     void setTodoId(int id);
 
     void addElement();
+
+    void removeElement(Element element);
+
+    void saveElements(List<Element> elements);
 }

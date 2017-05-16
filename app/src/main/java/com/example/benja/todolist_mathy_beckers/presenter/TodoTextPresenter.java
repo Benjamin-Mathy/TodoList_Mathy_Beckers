@@ -37,7 +37,19 @@ public class TodoTextPresenter extends BasePresenter implements ITodoTextPresent
 
     @Override
     public void addElement() {
-        Element element = new Element("New Element", getElementDAO().readElement(todoId).size());
+        Element element = new Element("", getElementDAO().readElement(todoId).size());
         getElementDAO().createElement(element, todoId);
+    }
+
+    @Override
+    public void removeElement(Element element) {
+        getElementDAO().deleteElement(element);
+    }
+
+    @Override
+    public void saveElements(List<Element> elements) {
+        for (Element e : elements) {
+            getElementDAO().updateElement(e, todoId);
+        }
     }
 }
