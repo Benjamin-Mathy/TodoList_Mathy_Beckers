@@ -1,27 +1,38 @@
 package com.example.benja.todolist_mathy_beckers.view;
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.DocumentsContract;
 import android.provider.MediaStore;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.benja.todolist_mathy_beckers.R;
 import com.example.benja.todolist_mathy_beckers.adapter.ImageAdapter;
+import com.example.benja.todolist_mathy_beckers.adapter.TextAdapter;
 import com.example.benja.todolist_mathy_beckers.dataSource.ElementDAO;
+import com.example.benja.todolist_mathy_beckers.dataSource.NotificationDAO;
+import com.example.benja.todolist_mathy_beckers.dataSource.TodolistDAO;
 import com.example.benja.todolist_mathy_beckers.presenter.ITodoImagePresenter;
 import com.example.benja.todolist_mathy_beckers.presenter.TodoImagePresenter;
 
 import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by Max on 12-04-17.
@@ -30,46 +41,47 @@ import java.io.File;
 public class TodoImageActivity extends AppCompatActivity implements ITodoImageActivity {
 
     private ImageAdapter adapter;
-    private ITodoImagePresenter presenter = new TodoImagePresenter(this, new ElementDAO(this));
+    private ITodoImagePresenter presenter = new TodoImagePresenter(this, new TodolistDAO(this),new ElementDAO(this), new NotificationDAO(this));
 
     private static final int SELECT_PICTURE = 1;
     static final int REQUEST_IMAGE_CAPTURE = 2;
-    private String selectedImagePath;
-    private Uri imageUri;
+
+    private ListView elements;
+    Uri newPicture;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_imagelist);
 
-
-        findViewById(R.id.addPicture).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent,
-                        "Select Picture"), SELECT_PICTURE);
-            }
-        });
-
-        findViewById(R.id.takePicture).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
-                imageUri = Uri.fromFile(new File(Environment.getExternalStorageDirectory(),"fname_" + String.valueOf(System.currentTimeMillis()) + ".jpg"));
-                    intent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, imageUri);
-                startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
-            }
-        });
+        presenter.setTodoId(getIntent().getIntExtra("id", -1));
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_back_24dp);
         ActionBar actionBar = getSupportActionBar();
+
+        createList();
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        createList();
+    }
+
+    public void createList(){
+        elements = (ListView) findViewById(R.id.imageElements);
+        adapter = new ImageAdapter(this, presenter.getAllElements());
+        elements.setAdapter(adapter);
+
+        elements.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //TODO afficher image en grand
+            }
+        });
     }
 
     @Override
@@ -78,49 +90,80 @@ public class TodoImageActivity extends AppCompatActivity implements ITodoImageAc
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
             if (requestCode == SELECT_PICTURE) {
-                Uri selectedImageUri = data.getData();
-                selectedImagePath = getPath(selectedImageUri);
+                presenter.addElement(getRealPathFromURI(this, data.getData()));
+                onResume();
             }
             if (requestCode == REQUEST_IMAGE_CAPTURE) {
+                presenter.addElement(getRealPathFromURI(this, newPicture));
+                onResume();
+            }
+        }else if (resultCode == RESULT_CANCELED) {
+            Toast.makeText(this, R.string.cancel, Toast.LENGTH_SHORT).show();
+        }
+    }
 
-                //use imageUri here to access the image
+    private File createImageFile() throws IOException {
+        String imageFileName = "2DEW_" + new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(imageFileName, ".jpg", storageDir);
+        return image;
+    }
 
-                Bundle extras = data.getExtras();
+    public void choosePicturePressed(View view) {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), SELECT_PICTURE);
+    }
 
-                Log.e("URI", imageUri.toString());
-
-                Bitmap bmp = (Bitmap) extras.get("data");
-
-                // here you will get the image as bitmap
-
-
-            } else if (resultCode == RESULT_CANCELED) {
-                Toast.makeText(this, "Picture was not taken", Toast.LENGTH_SHORT);
+    public void takePicturePressed(View view) {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        // Ensure that there's a camera activity to handle the intent
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            // Create the File where the photo should go
+            File photoFile = null;
+            try {
+                photoFile = createImageFile();
+            } catch (IOException ex) {
+                // Error occurred while creating the File
+            }
+            // Continue only if the File was successfully created
+            if (photoFile != null) {
+                newPicture = FileProvider.getUriForFile(this,
+                        "com.example.benja.todolist_mathy_beckers.fileprovider",
+                        photoFile);
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, newPicture);
+                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
             }
         }
     }
-    public String getPath(Uri uri) {
-        // just some safety built in
-        if( uri == null ) {
-            // TODO perform some logging or show user feedback
-            return null;
+
+    public String getRealPathFromURI(Context context, Uri contentUri) {
+        String filePath = "";
+        String wholeID = DocumentsContract.getDocumentId(contentUri);
+
+        // Split at colon, use second item in the array
+        String id = wholeID.split(":")[1];
+
+        String[] column = { MediaStore.Images.Media.DATA };
+
+        // where id is equal to
+        String sel = MediaStore.Images.Media._ID + "=?";
+
+        Cursor cursor = context.getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                column, sel, new String[]{ id }, null);
+
+        int columnIndex = cursor.getColumnIndex(column[0]);
+
+        if (cursor.moveToFirst()) {
+            filePath = cursor.getString(columnIndex);
         }
-        // try to retrieve the image from the media store first
-        // this will only work for images selected from gallery
-        String[] projection = { MediaStore.Images.Media.DATA };
-        Cursor cursor = managedQuery(uri, projection, null, null, null);
-        if( cursor != null ){
-            int column_index = cursor
-                    .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-            cursor.moveToFirst();
-            String path = cursor.getString(column_index);
-            cursor.close();
-            return path;
-        }
-        // this is our fallback here
-        return uri.getPath();
+        cursor.close();
+        return filePath;
     }
 }

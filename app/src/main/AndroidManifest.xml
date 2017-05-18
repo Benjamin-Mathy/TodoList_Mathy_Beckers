@@ -67,6 +67,16 @@
                 android:value=".view.MainActivity" />
         </activity>
 
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.example.benja.todolist_mathy_beckers.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAABfzxD9oA8eyP4VVwJGtk1h8w7OfUxsg"/>

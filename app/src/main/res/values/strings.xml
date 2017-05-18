@@ -5,4 +5,5 @@
     <string name="activity_textlist">2Dew - Text List</string>
 
     <string name="search">Search</string>
+    <string name="cancel">Action canceled</string>
 </resources>

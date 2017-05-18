@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
         todos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //TODO : Faire pour pouvoir utiliser les imageList déjà créées
                 createIntentForText(((Todo)parent.getItemAtPosition(position)).getId());
             }
         });

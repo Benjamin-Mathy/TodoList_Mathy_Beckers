@@ -91,11 +91,11 @@ public class ElementDAO extends BaseDAO implements IElementDAO {
         }
         cursor.close();
         close();
-        return null;
+        return Elements;
     }
+
     @Override
     public List<Element> readElementSon(int idTodolist) {
-
         return null;
     }
 

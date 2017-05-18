@@ -49,6 +49,7 @@ public class TodoTextActivity extends AppCompatActivity implements ITodoTextActi
         setContentView(R.layout.activity_textlist);
 
         presenter.setTodoId(getIntent().getIntExtra("id", -1));
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -88,12 +89,6 @@ public class TodoTextActivity extends AppCompatActivity implements ITodoTextActi
         elements = (ListView) findViewById(R.id.textElements);
         adapter = new TextAdapter(this, presenter.getAllElements());
         elements.setAdapter(adapter);
-
-        elements.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            }
-        });
     }
 
     @Override

@@ -19,7 +19,7 @@ public class TodoTextPresenter extends BasePresenter implements ITodoTextPresent
 
     ITodoTextActivity view;
 
-    int todoId;
+    private int todoId;
 
     public TodoTextPresenter(ITodoTextActivity view, ITodolistDAO daoTodo, IElementDAO daoElem, INotificationDAO daoNotif){
         super(daoTodo, daoElem, daoNotif);
