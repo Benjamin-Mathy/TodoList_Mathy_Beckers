@@ -1,10 +1,14 @@
 package com.example.benja.todolist_mathy_beckers.view;
 
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
+import android.media.RingtoneManager;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.NotificationCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.View;
@@ -21,8 +25,10 @@ import com.example.benja.todolist_mathy_beckers.model.Todo;
 import com.example.benja.todolist_mathy_beckers.model.TodoType;
 import com.example.benja.todolist_mathy_beckers.presenter.IMainPresenter;
 import com.example.benja.todolist_mathy_beckers.presenter.MainPresenter;
+import com.google.firebase.messaging.RemoteMessage;
 
 import static android.provider.AlarmClock.EXTRA_MESSAGE;
+import static android.provider.AlarmClock.EXTRA_RINGTONE;
 
 public class MainActivity extends AppCompatActivity implements IMainActivity {
 
@@ -78,9 +84,35 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
     }
 
     public void soundButtonclicked(View view){
-        Intent intent = new Intent(this, MapActivity.class);
+        NotificationManager mNotificationManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationCompat.Builder mNotifyBuilder;
+// Sets an ID for the notification, so it can be updated
+        int notifyID = 1;
+        mNotifyBuilder = (NotificationCompat.Builder) new NotificationCompat.Builder(this)
+                .setContentTitle("2Dew Test notif")
+                .setContentText("You've received new messages.")
+                .setSmallIcon(R.drawable.cast_ic_notification_1)
+                .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
+        int numMessages = 0;
+// Start of a loop that processes data and then notifies the user
+
+        mNotifyBuilder.setContentText("coucou")
+                .setNumber(++numMessages);
+        // Because the ID remains unchanged, the existing notification is
+        // updated.
+        mNotificationManager.notify(
+                notifyID,
+                mNotifyBuilder.build());
+
+
+
+
+
+        //TODO  Open map activity
+        /*Intent intent = new Intent(this, MapActivity.class);
         intent.putExtra(EXTRA_MESSAGE, "test");
-        startActivity(intent);
+        startActivity(intent);*/
     }
 
     public void newTextList(View view){
