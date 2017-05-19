@@ -1,6 +1,7 @@
 package com.example.benja.todolist_mathy_beckers.dataSource;
 
 import com.example.benja.todolist_mathy_beckers.model.Todo;
+import com.example.benja.todolist_mathy_beckers.model.TodoType;
 
 import java.util.List;
 
@@ -15,4 +16,5 @@ public interface ITodolistDAO {
     void updateTodolist(Todo todo);
     void deleteTodolist(Todo todo);
     List<Todo>getTodolists();
+    TodoType getTodolistType(int idTodolist);
 }

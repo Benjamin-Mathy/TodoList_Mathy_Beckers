@@ -57,17 +57,19 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
         todos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //TODO : Faire pour pouvoir utiliser les imageList déjà créées
-                createIntentForText(((Todo)parent.getItemAtPosition(position)).getId());
+                int idTodo = (int) ((Todo)parent.getItemAtPosition(position)).getId();
+                TodoType type = presenter.getTypeOfTodo(idTodo);
+                switch (type){
+                    case TEXT:
+                        createIntentForText(idTodo);
+                        break;
+                    case IMAGE:
+                        createIntentForImage(idTodo);
+                        break;
+                }
+
             }
         });
-    }
-
-    public void createIntentForText(long id){
-        Intent intent = new Intent(this, TodoTextActivity.class);
-        intent.putExtra("id", (int)id);
-        startActivity(intent);
-
     }
 
     @Override
@@ -122,10 +124,22 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
         startActivity(intent);
     }
 
+    public void createIntentForText(long id){
+        Intent intent = new Intent(this, TodoTextActivity.class);
+        intent.putExtra("id", (int)id);
+        startActivity(intent);
+    }
+
     public void newImageList(View view){
         presenter.addTodo(TodoType.IMAGE);
         Intent intent = new Intent(this, TodoImageActivity.class);
         intent.putExtra("id", presenter.getLastTodoId());
+        startActivity(intent);
+    }
+
+    public void createIntentForImage(long id){
+        Intent intent = new Intent(this, TodoImageActivity.class);
+        intent.putExtra("id", (int)id);
         startActivity(intent);
     }
 

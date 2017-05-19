@@ -60,4 +60,9 @@ public class MainPresenter extends BasePresenter implements IMainPresenter{
         }
         getTodoDAO().deleteTodolist(todo);
     }
+
+    @Override
+    public TodoType getTypeOfTodo(int id) {
+        return getTodoDAO().getTodolistType(id);
+    }
 }

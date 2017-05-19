@@ -44,6 +44,20 @@ public class TodolistDAO extends BaseDAO implements ITodolistDAO {
     }
 
     @Override
+    public TodoType getTodolistType(int idTodolist){
+        openR();
+
+        Cursor cursor = getTodo(idTodolist);
+        TodoType type;
+        cursor.moveToFirst();
+        type = TodoType.valueFor(cursor.getString(cursor.getColumnIndexOrThrow(TodolistTable.FeedEntry.COLUMN_TYPE)));
+
+        cursor.close();
+        close();
+        return type;
+    }
+
+    @Override
     public Todo readTodolist(int idTodolist) {
         openR();
         NotificationDAO notificationDAO = new NotificationDAO(this.context);

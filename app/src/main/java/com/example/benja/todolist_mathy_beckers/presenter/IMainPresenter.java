@@ -18,4 +18,6 @@ public interface IMainPresenter {
     int getLastTodoId();
 
     void removeTodo(Todo todo);
+
+    TodoType getTypeOfTodo(int todoId);
 }

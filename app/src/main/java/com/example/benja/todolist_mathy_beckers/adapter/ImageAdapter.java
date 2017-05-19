@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -51,11 +52,12 @@ public class ImageAdapter extends BaseAdapter {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View v = inflater.inflate(R.layout.imageelement_item, parent, false);
-        TextView tv = (TextView)v.findViewById(R.id.todoName);
-        tv.setText(elements.get(position).getText());
-        v.setTag(elements.get(position));
+        EditText et = (EditText) v.findViewById(R.id.elementName);
+        et.setText(elements.get(position).getText());
         ImageView iv = (ImageView)v.findViewById(R.id.elementImage);
+        iv.setImageURI(null);
         iv.setImageURI(Uri.parse(elements.get(position).getImage()));
+        v.setTag(elements.get(position));
         return v;
     }
 }

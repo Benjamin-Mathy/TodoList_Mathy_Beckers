@@ -49,8 +49,8 @@ public class TextAdapter extends BaseAdapter {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View v = inflater.inflate(R.layout.textelement_item, parent, false);
-        EditText ev = (EditText) v.findViewById(R.id.elementName);
-        ev.setText(elements.get(position).getText());
+        EditText et = (EditText) v.findViewById(R.id.elementName);
+        et.setText(elements.get(position).getText());
         v.setTag(elements.get(position));
         return v;
     }

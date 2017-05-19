@@ -26,6 +26,8 @@ import com.example.benja.todolist_mathy_beckers.adapter.TextAdapter;
 import com.example.benja.todolist_mathy_beckers.dataSource.ElementDAO;
 import com.example.benja.todolist_mathy_beckers.dataSource.NotificationDAO;
 import com.example.benja.todolist_mathy_beckers.dataSource.TodolistDAO;
+import com.example.benja.todolist_mathy_beckers.model.Element;
+import com.example.benja.todolist_mathy_beckers.model.ElementImage;
 import com.example.benja.todolist_mathy_beckers.presenter.ITodoImagePresenter;
 import com.example.benja.todolist_mathy_beckers.presenter.TodoImagePresenter;
 
@@ -95,11 +97,11 @@ public class TodoImageActivity extends AppCompatActivity implements ITodoImageAc
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
             if (requestCode == SELECT_PICTURE) {
-                presenter.addElement(getRealPathFromURI(this, data.getData()));
+                presenter.addElement(getPath(data.getData()));
                 onResume();
             }
             if (requestCode == REQUEST_IMAGE_CAPTURE) {
-                presenter.addElement(getRealPathFromURI(this, newPicture));
+                presenter.addElement(getPath(newPicture));
                 onResume();
             }
         }else if (resultCode == RESULT_CANCELED) {
@@ -143,27 +145,29 @@ public class TodoImageActivity extends AppCompatActivity implements ITodoImageAc
         }
     }
 
-    public String getRealPathFromURI(Context context, Uri contentUri) {
-        String filePath = "";
-        String wholeID = DocumentsContract.getDocumentId(contentUri);
+    public void removeElement(View view){
+        final int position = elements.getPositionForView((View) view.getParent());
+        presenter.removeElement(((ElementImage) elements.getItemAtPosition(position)));
+        onResume();
+    }
 
-        // Split at colon, use second item in the array
+    public String getPath(Uri uri){
+        String wholeID = DocumentsContract.getDocumentId(uri);
         String id = wholeID.split(":")[1];
-
         String[] column = { MediaStore.Images.Media.DATA };
 
-        // where id is equal to
         String sel = MediaStore.Images.Media._ID + "=?";
 
-        Cursor cursor = context.getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                column, sel, new String[]{ id }, null);
-
+        Cursor cursor = getContentResolver().
+                query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                        column, sel, new String[]{ id }, null);
+        String filePath = "";
         int columnIndex = cursor.getColumnIndex(column[0]);
-
         if (cursor.moveToFirst()) {
             filePath = cursor.getString(columnIndex);
         }
         cursor.close();
+
         return filePath;
     }
 }
