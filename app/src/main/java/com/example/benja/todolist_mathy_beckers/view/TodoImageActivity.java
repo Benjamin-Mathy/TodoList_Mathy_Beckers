@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -20,6 +21,7 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.benja.todolist_mathy_beckers.R;
@@ -54,6 +56,8 @@ public class TodoImageActivity extends AppCompatActivity implements ITodoImageAc
 
     private ListView elements;
     private LinearLayout menu;
+    private RelativeLayout layout;
+    private EditText titleEdit;
     Uri newPicture;
 
     @Override
@@ -61,16 +65,26 @@ public class TodoImageActivity extends AppCompatActivity implements ITodoImageAc
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_imagelist);
         menu = (LinearLayout) findViewById(R.id.settings_menu);
-
         presenter.setTodoId(getIntent().getIntExtra("id", -1));
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_back_24dp);
-        ActionBar actionBar = getSupportActionBar();
+
+        titleEdit = (EditText) findViewById(R.id.listTitle);
+        titleEdit.setText(presenter.getTitle());
+        titleEdit.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    saveTitle();
+                }
+            }
+        });
 
         createList();
+        setBackgroundColor();
     }
 
     @Override
@@ -83,12 +97,22 @@ public class TodoImageActivity extends AppCompatActivity implements ITodoImageAc
     public void onStop(){
         super.onStop();
         saveTexts();
+        saveTitle();
     }
 
     public void createList(){
         elements = (ListView) findViewById(R.id.imageElements);
         adapter = new ImageAdapter(this, presenter.getAllElements());
         elements.setAdapter(adapter);
+    }
+
+    public void setBackgroundColor(){
+        layout = (RelativeLayout) findViewById(R.id.TodoImageActivity);
+        layout.setBackgroundColor(Color.parseColor(presenter.getColor().toString()));
+    }
+
+    public void saveTitle(){
+        presenter.setTitle(titleEdit.getText().toString());
     }
 
     public void saveTexts(){
@@ -193,5 +217,16 @@ public class TodoImageActivity extends AppCompatActivity implements ITodoImageAc
         }else{
             menu.setVisibility(View.VISIBLE);
         }
+    }
+
+    public void chooseColor(View view){
+        String tag = (String) view.getTag();
+        presenter.setColor(tag);
+        Toast.makeText(this, R.string.color_changed, Toast.LENGTH_SHORT).show();
+        setBackgroundColor();
+    }
+
+    public void selectGpsLocation(View view) {
+
     }
 }

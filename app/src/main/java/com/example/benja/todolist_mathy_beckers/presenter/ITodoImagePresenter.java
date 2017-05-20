@@ -2,6 +2,7 @@ package com.example.benja.todolist_mathy_beckers.presenter;
 
 import android.net.Uri;
 
+import com.example.benja.todolist_mathy_beckers.model.Colors;
 import com.example.benja.todolist_mathy_beckers.model.Element;
 import com.example.benja.todolist_mathy_beckers.model.ElementImage;
 
@@ -22,4 +23,12 @@ public interface ITodoImagePresenter {
     void removeElement(ElementImage element);
 
     void saveElements(List<ElementImage> elements);
+
+    void setColor(String tag);
+
+    void setTitle(String title);
+
+    String getTitle();
+
+    Colors getColor();
 }

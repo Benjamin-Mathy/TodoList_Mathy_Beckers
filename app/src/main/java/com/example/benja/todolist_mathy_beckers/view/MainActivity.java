@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.benja.todolist_mathy_beckers.Manifest;
 import com.example.benja.todolist_mathy_beckers.R;
@@ -117,35 +118,7 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
     }
 
     public void soundButtonclicked(View view){
-        NotificationManager mNotificationManager =
-                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        NotificationCompat.Builder mNotifyBuilder;
-// Sets an ID for the notification, so it can be updated
-        int notifyID = 1;
-        mNotifyBuilder = (NotificationCompat.Builder) new NotificationCompat.Builder(this)
-                .setContentTitle("2Dew Test notif")
-                .setContentText("You've received new messages.")
-                .setSmallIcon(R.drawable.cast_ic_notification_1)
-                .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
-        int numMessages = 0;
-// Start of a loop that processes data and then notifies the user
-
-        mNotifyBuilder.setContentText("coucou")
-                .setNumber(++numMessages);
-        // Because the ID remains unchanged, the existing notification is
-        // updated.
-        mNotificationManager.notify(
-                notifyID,
-                mNotifyBuilder.build());
-
-
-
-
-
-        //TODO  Open map activity
-        /*Intent intent = new Intent(this, MapActivity.class);
-        intent.putExtra(EXTRA_MESSAGE, "test");
-        startActivity(intent);*/
+        Toast.makeText(this, R.string.not_available, Toast.LENGTH_SHORT).show();
     }
 
     public void newTextList(View view){

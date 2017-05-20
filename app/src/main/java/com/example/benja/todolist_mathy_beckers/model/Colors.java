@@ -12,9 +12,7 @@ public enum Colors {
     GREEN("#81C784"),
     YELLOW("#FFF176"),
     BLUE("#64B5F6"),
-    ORANGE("#FFB74D"),
-    GREY("#B0BEC5"),
-    PINK("#F48FB1");
+    ORANGE("#FFB74D");
 
     private final String color;
 

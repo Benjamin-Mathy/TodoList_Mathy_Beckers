@@ -15,6 +15,8 @@
         <Button
             android:background="@drawable/round_red"
             android:paddingTop="1dp"
+            android:onClick="chooseColor"
+            android:tag="RED"
             android:layout_marginBottom="35dp"
             android:layout_marginEnd="13dp"
             android:layout_width="40dp"
@@ -24,6 +26,8 @@
         <Button
             android:background="@drawable/round_blue"
             android:paddingTop="1dp"
+            android:onClick="chooseColor"
+            android:tag="BLUE"
             android:layout_marginBottom="35dp"
             android:layout_marginEnd="13dp"
             android:layout_width="40dp"
@@ -33,6 +37,8 @@
         <Button
             android:background="@drawable/round_yellow"
             android:paddingTop="1dp"
+            android:onClick="chooseColor"
+            android:tag="YELLOW"
             android:layout_marginBottom="35dp"
             android:layout_marginEnd="13dp"
             android:layout_width="40dp"
@@ -42,6 +48,8 @@
         <Button
             android:background="@drawable/round_orange"
             android:paddingTop="1dp"
+            android:onClick="chooseColor"
+            android:tag="ORANGE"
             android:layout_marginBottom="35dp"
             android:layout_marginEnd="13dp"
             android:layout_width="40dp"
@@ -51,6 +59,8 @@
         <Button
             android:background="@drawable/round_green"
             android:paddingTop="1dp"
+            android:onClick="chooseColor"
+            android:tag="GREEN"
             android:layout_marginBottom="35dp"
             android:layout_marginEnd="13dp"
             android:layout_width="40dp"
@@ -79,6 +89,7 @@
         <Button
             android:background="@drawable/round_button"
             android:drawableTop="@drawable/ic_place_24dp"
+            android:onClick="selectGpsLocation"
             android:paddingTop="23dp"
             android:layout_width="70dp"
             android:layout_height="70dp"

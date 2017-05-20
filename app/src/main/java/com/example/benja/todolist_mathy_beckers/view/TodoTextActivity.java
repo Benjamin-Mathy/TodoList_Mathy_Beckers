@@ -1,11 +1,15 @@
 package com.example.benja.todolist_mathy_beckers.view;
 
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.media.RingtoneManager;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.NotificationCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.View;
@@ -13,6 +17,8 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.example.benja.todolist_mathy_beckers.R;
 import com.example.benja.todolist_mathy_beckers.adapter.TextAdapter;
@@ -44,25 +50,34 @@ public class TodoTextActivity extends AppCompatActivity implements ITodoTextActi
 
     private ListView elements;
     private LinearLayout menu;
+    private RelativeLayout layout;
+    private EditText titleEdit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_textlist);
         menu = (LinearLayout) findViewById(R.id.settings_menu);
-
         presenter.setTodoId(getIntent().getIntExtra("id", -1));
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_back_24dp);
-        ActionBar actionBar = getSupportActionBar();
 
-        //getActionBar().setBackgroundDrawable(new ColorDrawable(Color.rgb(248, 248, 248)));
-        //rl.setBackgroundColor(Color.parseColor(todos.get(position).getColor().toString()));
+        titleEdit = (EditText) findViewById(R.id.listTitle);
+        titleEdit.setText(presenter.getTitle());
+        titleEdit.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    saveTitle();
+                }
+            }
+        });
 
         createList();
+        setBackgroundColor();
     }
 
     @Override
@@ -75,12 +90,22 @@ public class TodoTextActivity extends AppCompatActivity implements ITodoTextActi
     public void onStop(){
         super.onStop();
         saveTexts();
+        saveTitle();
     }
 
     public void createList(){
         elements = (ListView) findViewById(R.id.textElements);
         adapter = new TextAdapter(this, presenter.getAllElements());
         elements.setAdapter(adapter);
+    }
+
+    public void setBackgroundColor(){
+        layout = (RelativeLayout) findViewById(R.id.TodoTextActivity);
+        layout.setBackgroundColor(Color.parseColor(presenter.getColor().toString()));
+    }
+
+    public void saveTitle(){
+        presenter.setTitle(titleEdit.getText().toString());
     }
 
     public void saveTexts(){
@@ -119,5 +144,40 @@ public class TodoTextActivity extends AppCompatActivity implements ITodoTextActi
         }else{
             menu.setVisibility(View.VISIBLE);
         }
+    }
+
+    public void chooseColor(View view){
+        String tag = (String) view.getTag();
+        presenter.setColor(tag);
+        Toast.makeText(this, R.string.color_changed, Toast.LENGTH_SHORT).show();
+        setBackgroundColor();
+    }
+
+    public void selectGpsLocation(View view) {
+        NotificationManager mNotificationManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationCompat.Builder mNotifyBuilder;
+// Sets an ID for the notification, so it can be updated
+        int notifyID = 1;
+        mNotifyBuilder = (NotificationCompat.Builder) new NotificationCompat.Builder(this)
+                .setContentTitle("2Dew Test notif")
+                .setContentText("You've received new messages.")
+                .setSmallIcon(R.drawable.cast_ic_notification_1)
+                .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
+        int numMessages = 0;
+// Start of a loop that processes data and then notifies the user
+
+        mNotifyBuilder.setContentText("coucou")
+                .setNumber(++numMessages);
+        // Because the ID remains unchanged, the existing notification is
+        // updated.
+        mNotificationManager.notify(
+                notifyID,
+                mNotifyBuilder.build());
+
+        //TODO  Open map activity
+        Intent intent = new Intent(this, MapActivity.class);
+        intent.putExtra(EXTRA_MESSAGE, "test");
+        startActivity(intent);
     }
 }

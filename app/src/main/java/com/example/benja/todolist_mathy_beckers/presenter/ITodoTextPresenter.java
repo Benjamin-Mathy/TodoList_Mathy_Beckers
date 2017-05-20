@@ -1,5 +1,8 @@
 package com.example.benja.todolist_mathy_beckers.presenter;
 
+import android.graphics.Color;
+
+import com.example.benja.todolist_mathy_beckers.model.Colors;
 import com.example.benja.todolist_mathy_beckers.model.Element;
 
 import java.util.List;
@@ -19,4 +22,12 @@ public interface ITodoTextPresenter {
     void removeElement(Element element);
 
     void saveElements(List<Element> elements);
+
+    void setTitle(String title);
+
+    String getTitle();
+
+    void setColor(String tag);
+
+    Colors getColor();
 }

@@ -16,6 +16,13 @@
         android:background="@color/colorPrimary"
         android:elevation="4dp"
         app:titleTextColor="@color/whiteText">
+        <EditText
+            android:id="@+id/listTitle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="@color/whiteText"
+            android:textSize="20sp"
+            android:background="@android:color/transparent"/>
     </android.support.v7.widget.Toolbar>
 
     <RelativeLayout

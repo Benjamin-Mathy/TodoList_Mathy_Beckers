@@ -1,6 +1,5 @@
 package com.example.benja.todolist_mathy_beckers.presenter;
 
-import com.example.benja.todolist_mathy_beckers.dataSource.ElementDAO;
 import com.example.benja.todolist_mathy_beckers.dataSource.IElementDAO;
 import com.example.benja.todolist_mathy_beckers.dataSource.INotificationDAO;
 import com.example.benja.todolist_mathy_beckers.dataSource.ITodolistDAO;
@@ -51,5 +50,29 @@ public class TodoTextPresenter extends BasePresenter implements ITodoTextPresent
         for (Element e : elements) {
             getElementDAO().updateElement(e, todoId);
         }
+    }
+
+    @Override
+    public void setTitle(String title){
+        Todo todo = getTodoDAO().readTodolistOnly(todoId);
+        todo.setName(title);
+        getTodoDAO().updateTodolist(todo);
+    }
+
+    @Override
+    public String getTitle(){
+        return getTodoDAO().readTodolistOnly(todoId).getName();
+    }
+
+    @Override
+    public void setColor(String tag) {
+        Todo todo = getTodoDAO().readTodolistOnly(todoId);
+        todo.setColor(Colors.valueOf(tag));
+        getTodoDAO().updateTodolist(todo);
+    }
+
+    @Override
+    public Colors getColor() {
+        return getTodoDAO().readTodolistOnly(todoId).getColor();
     }
 }

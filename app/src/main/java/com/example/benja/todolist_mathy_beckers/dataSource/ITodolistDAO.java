@@ -13,6 +13,7 @@ public interface ITodolistDAO {
 
     long createTodolist(Todo todo);
     Todo readTodolist(int idTodolist);
+    Todo readTodolistOnly(int idTodolist);
     void updateTodolist(Todo todo);
     void deleteTodolist(Todo todo);
     List<Todo>getTodolists();
