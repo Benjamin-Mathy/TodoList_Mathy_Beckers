@@ -3,9 +3,12 @@ package com.example.benja.todolist_mathy_beckers.view;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.media.RingtoneManager;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.NotificationCompat;
@@ -16,6 +19,7 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.example.benja.todolist_mathy_beckers.Manifest;
 import com.example.benja.todolist_mathy_beckers.R;
 import com.example.benja.todolist_mathy_beckers.adapter.TodosAdapter;
 import com.example.benja.todolist_mathy_beckers.dataSource.ElementDAO;
@@ -26,6 +30,9 @@ import com.example.benja.todolist_mathy_beckers.model.TodoType;
 import com.example.benja.todolist_mathy_beckers.presenter.IMainPresenter;
 import com.example.benja.todolist_mathy_beckers.presenter.MainPresenter;
 import com.google.firebase.messaging.RemoteMessage;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static android.provider.AlarmClock.EXTRA_MESSAGE;
 import static android.provider.AlarmClock.EXTRA_RINGTONE;
@@ -46,7 +53,31 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
 
+        askAllPermissions();
+
         createList();
+    }
+
+    public void askAllPermissions(){
+        List<String> permissions = new ArrayList();
+        testPermission(android.Manifest.permission.ACCESS_COARSE_LOCATION, permissions);
+        testPermission(android.Manifest.permission.ACCESS_FINE_LOCATION, permissions);
+        testPermission(android.Manifest.permission.ACCESS_LOCATION_EXTRA_COMMANDS, permissions);
+        testPermission(android.Manifest.permission.ACCESS_NOTIFICATION_POLICY, permissions);
+        testPermission(android.Manifest.permission.CAMERA, permissions);
+        testPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE, permissions);
+        testPermission(android.Manifest.permission.INTERNET, permissions);
+        testPermission(android.Manifest.permission.ACCESS_NETWORK_STATE, permissions);
+        int result = 0;
+        if(!permissions.isEmpty()){
+            ActivityCompat.requestPermissions(this, permissions.toArray(new String[0]), result);
+        }
+    }
+
+    private void testPermission(String permission, List<String> permissions){
+        if(ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED){
+            permissions.add(permission);
+        }
     }
 
     public void createList(){

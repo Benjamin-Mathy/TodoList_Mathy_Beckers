@@ -17,6 +17,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -34,7 +36,9 @@ import com.example.benja.todolist_mathy_beckers.presenter.TodoImagePresenter;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Max on 12-04-17.
@@ -49,12 +53,14 @@ public class TodoImageActivity extends AppCompatActivity implements ITodoImageAc
     static final int REQUEST_IMAGE_CAPTURE = 2;
 
     private ListView elements;
+    private LinearLayout menu;
     Uri newPicture;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_imagelist);
+        menu = (LinearLayout) findViewById(R.id.settings_menu);
 
         presenter.setTodoId(getIntent().getIntExtra("id", -1));
 
@@ -73,17 +79,27 @@ public class TodoImageActivity extends AppCompatActivity implements ITodoImageAc
         createList();
     }
 
+    @Override
+    public void onStop(){
+        super.onStop();
+        saveTexts();
+    }
+
     public void createList(){
         elements = (ListView) findViewById(R.id.imageElements);
         adapter = new ImageAdapter(this, presenter.getAllElements());
         elements.setAdapter(adapter);
+    }
 
-        elements.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //TODO afficher image en grand
-            }
-        });
+    public void saveTexts(){
+        List<ElementImage> elList = new ArrayList();
+        for (int i = elements.getChildCount() - 1 ; i>=0; i--) {
+            ElementImage el = (ElementImage) elements.getItemAtPosition(i);
+            EditText et = (EditText) elements.getChildAt(i).findViewById(R.id.elementName);
+            el.setText(et.getText().toString());
+            elList.add(el);
+        }
+        presenter.saveElements(elList);
     }
 
     @Override
@@ -169,5 +185,13 @@ public class TodoImageActivity extends AppCompatActivity implements ITodoImageAc
         cursor.close();
 
         return filePath;
+    }
+
+    public void openMenu(View view) {
+        if(menu.getVisibility() == View.VISIBLE){
+            menu.setVisibility(View.INVISIBLE);
+        }else{
+            menu.setVisibility(View.VISIBLE);
+        }
     }
 }

@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.example.benja.todolist_mathy_beckers.R;
@@ -42,11 +43,13 @@ public class TodoTextActivity extends AppCompatActivity implements ITodoTextActi
     private ITodoTextPresenter presenter = new TodoTextPresenter(this, new TodolistDAO(this), new ElementDAO(this), new NotificationDAO(this));
 
     private ListView elements;
+    private LinearLayout menu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_textlist);
+        menu = (LinearLayout) findViewById(R.id.settings_menu);
 
         presenter.setTodoId(getIntent().getIntExtra("id", -1));
 
@@ -74,6 +77,12 @@ public class TodoTextActivity extends AppCompatActivity implements ITodoTextActi
         saveTexts();
     }
 
+    public void createList(){
+        elements = (ListView) findViewById(R.id.textElements);
+        adapter = new TextAdapter(this, presenter.getAllElements());
+        elements.setAdapter(adapter);
+    }
+
     public void saveTexts(){
         List<Element> elList = new ArrayList();
         for (int i = elements.getChildCount() - 1 ; i>=0; i--) {
@@ -83,12 +92,6 @@ public class TodoTextActivity extends AppCompatActivity implements ITodoTextActi
             elList.add(el);
         }
         presenter.saveElements(elList);
-    }
-
-    public void createList(){
-        elements = (ListView) findViewById(R.id.textElements);
-        adapter = new TextAdapter(this, presenter.getAllElements());
-        elements.setAdapter(adapter);
     }
 
     @Override
@@ -108,5 +111,13 @@ public class TodoTextActivity extends AppCompatActivity implements ITodoTextActi
         final int position = elements.getPositionForView((View) view.getParent());
         presenter.removeElement(((Element)elements.getItemAtPosition(position)));
         onResume();
+    }
+
+    public void openMenu(View view) {
+        if(menu.getVisibility() == View.VISIBLE){
+            menu.setVisibility(View.INVISIBLE);
+        }else{
+            menu.setVisibility(View.VISIBLE);
+        }
     }
 }
