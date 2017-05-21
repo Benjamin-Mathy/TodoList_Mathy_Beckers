@@ -1,7 +1,6 @@
 package com.example.benja.todolist_mathy_beckers.adapter;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,12 +8,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-
 import com.example.benja.todolist_mathy_beckers.R;
 import com.example.benja.todolist_mathy_beckers.model.ElementImage;
-import com.example.benja.todolist_mathy_beckers.model.Todo;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -54,9 +50,15 @@ public class ImageAdapter extends BaseAdapter {
         View v = inflater.inflate(R.layout.imageelement_item, parent, false);
         EditText et = (EditText) v.findViewById(R.id.elementName);
         et.setText(elements.get(position).getText());
+
         ImageView iv = (ImageView)v.findViewById(R.id.elementImage);
-        iv.setImageURI(null);
-        iv.setImageURI(Uri.parse(elements.get(position).getImage()));
+        //iv.setImageURI(null);
+        //iv.setImageURI(Uri.parse(elements.get(position).getImage()));
+
+        Picasso.with(context)
+                .load("file://" + Uri.parse(elements.get(position).getImage())).fit().centerInside()
+                .into(iv);
+
         v.setTag(elements.get(position));
         return v;
     }
