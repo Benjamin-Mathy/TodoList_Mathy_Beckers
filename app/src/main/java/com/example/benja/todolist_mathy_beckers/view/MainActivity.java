@@ -49,8 +49,7 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
 
     /*
     TODO :
-        - Affichage des images
-        - Afficher nouvelles photos
+        - Images lentes
         - Fenêtre de choix d'heure
         + Partie notifs
      */

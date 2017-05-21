@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
+import android.support.v4.content.CursorLoader;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -61,7 +62,8 @@ public class TodoImageActivity extends AppCompatActivity implements ITodoImageAc
     private LinearLayout menu;
     private RelativeLayout layout;
     private EditText titleEdit;
-    Uri newPicture;
+    private Uri newPicture;
+    private String newPath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -140,7 +142,7 @@ public class TodoImageActivity extends AppCompatActivity implements ITodoImageAc
                 onResume();
             }
             if (requestCode == REQUEST_IMAGE_CAPTURE) {
-                presenter.addElement(getPath(newPicture));
+                presenter.addElement(newPath);
                 onResume();
             }
         }else if (resultCode == RESULT_CANCELED) {
@@ -152,6 +154,7 @@ public class TodoImageActivity extends AppCompatActivity implements ITodoImageAc
         String imageFileName = "2DEW_" + new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File image = File.createTempFile(imageFileName, ".jpg", storageDir);
+        newPath = image.getAbsolutePath();
         return image;
     }
 
@@ -201,7 +204,10 @@ public class TodoImageActivity extends AppCompatActivity implements ITodoImageAc
                 query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
                         column, sel, new String[]{ id }, null);
         String filePath = "";
-        int columnIndex = cursor.getColumnIndex(column[0]);
+        int columnIndex = 0;
+        if (cursor != null) {
+            columnIndex = cursor.getColumnIndex(column[0]);
+        }
         if (cursor.moveToFirst()) {
             filePath = cursor.getString(columnIndex);
         }
