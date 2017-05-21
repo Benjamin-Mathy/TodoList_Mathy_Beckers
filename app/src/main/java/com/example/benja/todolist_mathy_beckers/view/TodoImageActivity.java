@@ -22,6 +22,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -64,16 +65,15 @@ public class TodoImageActivity extends AppCompatActivity implements ITodoImageAc
     private EditText titleEdit;
     private Uri newPicture;
     private String newPath;
+    private Button openMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_imagelist);
-
         menu = (LinearLayout) findViewById(R.id.settings_menu);
-
+        openMenu = (Button) findViewById(R.id.parametersMenu);
         presenter.setTodoId(getIntent().getIntExtra("id", -1));
-
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -219,8 +219,11 @@ public class TodoImageActivity extends AppCompatActivity implements ITodoImageAc
     public void openMenu(View view) {
         if(menu.getVisibility() == View.VISIBLE){
             menu.setVisibility(View.INVISIBLE);
+            openMenu.setBackground(getDrawable(R.drawable.round_button));
+
         }else{
             menu.setVisibility(View.VISIBLE);
+            openMenu.setBackground(getDrawable(R.drawable.round_button_selected));
         }
     }
 
@@ -231,7 +234,5 @@ public class TodoImageActivity extends AppCompatActivity implements ITodoImageAc
         setBackgroundColor();
     }
 
-    public void selectGpsLocation(View view) {
-
-    }
+    public void selectGpsLocation(View view) {}
 }

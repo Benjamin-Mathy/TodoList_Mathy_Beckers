@@ -14,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -52,12 +53,14 @@ public class TodoTextActivity extends AppCompatActivity implements ITodoTextActi
     private LinearLayout menu;
     private RelativeLayout layout;
     private EditText titleEdit;
+    private Button openMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_textlist);
         menu = (LinearLayout) findViewById(R.id.settings_menu);
+        openMenu = (Button) findViewById(R.id.parametersMenu);
         presenter.setTodoId(getIntent().getIntExtra("id", -1));
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -134,8 +137,10 @@ public class TodoTextActivity extends AppCompatActivity implements ITodoTextActi
     public void openMenu(View view) {
         if(menu.getVisibility() == View.VISIBLE){
             menu.setVisibility(View.INVISIBLE);
+            openMenu.setBackground(getDrawable(R.drawable.round_button));
         }else{
             menu.setVisibility(View.VISIBLE);
+            openMenu.setBackground(getDrawable(R.drawable.round_button_selected));
         }
     }
 
