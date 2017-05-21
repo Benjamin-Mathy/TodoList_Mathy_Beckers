@@ -4,10 +4,12 @@ package com.example.benja.todolist_mathy_beckers.model;
  * Created by Max on 10-04-17.
  */
 
+import java.util.Objects;
+
 /**
  * Classe représentant un élément textuel de todolist
  */
-public class Element {
+public class Element implements Comparable<Element>{
 
     private long id;
     private String text;
@@ -44,5 +46,15 @@ public class Element {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    @Override
+    public int compareTo(Element element){
+        if(this.getIndex() > element.getIndex()){
+            return 1;
+        }else if(this.getIndex() < element.getIndex()){
+            return -1;
+        }
+        return 0;
     }
 }

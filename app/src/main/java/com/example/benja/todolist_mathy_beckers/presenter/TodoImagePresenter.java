@@ -4,10 +4,12 @@ import com.example.benja.todolist_mathy_beckers.dataSource.IElementDAO;
 import com.example.benja.todolist_mathy_beckers.dataSource.INotificationDAO;
 import com.example.benja.todolist_mathy_beckers.dataSource.ITodolistDAO;
 import com.example.benja.todolist_mathy_beckers.model.Colors;
+import com.example.benja.todolist_mathy_beckers.model.Element;
 import com.example.benja.todolist_mathy_beckers.model.ElementImage;
 import com.example.benja.todolist_mathy_beckers.model.Todo;
 import com.example.benja.todolist_mathy_beckers.view.ITodoImageActivity;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -32,7 +34,9 @@ public class TodoImagePresenter extends BasePresenter implements ITodoImagePrese
 
     @Override
     public List<ElementImage> getAllElements() {
-        return getElementDAO().readElementImage(todoId);
+        List<ElementImage> elements = getElementDAO().readElementImage(todoId);
+        Collections.sort(elements);
+        return elements;
     }
 
     @Override

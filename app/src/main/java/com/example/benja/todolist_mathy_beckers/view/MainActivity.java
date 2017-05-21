@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.NotificationCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -44,6 +45,15 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
     private IMainPresenter presenter = new MainPresenter(this, new TodolistDAO(this), new ElementDAO(this), new NotificationDAO(this));
 
     private ListView todos;
+    private EditText searchField;
+
+    /*
+    TODO :
+        - Affichage des images
+        - Afficher nouvelles photos
+        - Fenêtre de choix d'heure
+        + Partie notifs
+     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,8 +65,8 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
         ActionBar actionBar = getSupportActionBar();
 
         askAllPermissions();
-
-        createList();
+        createList(presenter.getAllTodos());
+        setSearchfield();
     }
 
     public void askAllPermissions(){
@@ -81,9 +91,9 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
         }
     }
 
-    public void createList(){
+    public void createList(List<Todo> todolists){
         todos = (ListView) findViewById(R.id.todos);
-        adapter = new TodosAdapter(this, presenter.getAllTodos());
+        adapter = new TodosAdapter(this, todolists);
         todos.setAdapter(adapter);
 
         todos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -104,10 +114,16 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
         });
     }
 
+    private void setSearchfield() {
+        searchField = (EditText) findViewById(R.id.searchField);
+        searchField.setText("");
+    }
+
     @Override
     public void onResume(){
         super.onResume();
-        createList();
+        createList(presenter.getAllTodos());
+        setSearchfield();
     }
 
     @Override
@@ -153,5 +169,12 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
         onResume();
     }
 
-
+    public void processSearch(MenuItem item) {
+        if(searchField.getText().toString().length() < 3){
+            createList(presenter.getAllTodos());
+            setSearchfield();
+        }else {
+            createList(presenter.getTodosWith(searchField.getText().toString()));
+        }
+    }
 }

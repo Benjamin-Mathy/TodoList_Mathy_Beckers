@@ -12,6 +12,7 @@ import com.example.benja.todolist_mathy_beckers.model.TodoType;
 import com.example.benja.todolist_mathy_beckers.view.IMainActivity;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -64,5 +65,17 @@ public class MainPresenter extends BasePresenter implements IMainPresenter{
     @Override
     public TodoType getTypeOfTodo(int id) {
         return getTodoDAO().getTodolistType(id);
+    }
+
+    @Override
+    public List<Todo> getTodosWith(String request) {
+        List<Todo> todos = getAllTodos();
+        for (Iterator<Todo> iter = todos.listIterator(); iter.hasNext(); ) {
+            Todo t = iter.next();
+            if (!t.getName().contains(request)) {
+                iter.remove();
+            }
+        }
+        return todos;
     }
 }

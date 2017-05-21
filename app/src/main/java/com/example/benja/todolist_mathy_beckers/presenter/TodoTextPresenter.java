@@ -8,6 +8,8 @@ import com.example.benja.todolist_mathy_beckers.model.Element;
 import com.example.benja.todolist_mathy_beckers.model.Todo;
 import com.example.benja.todolist_mathy_beckers.view.ITodoTextActivity;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -31,7 +33,9 @@ public class TodoTextPresenter extends BasePresenter implements ITodoTextPresent
 
     @Override
     public List<Element> getAllElements() {
-        return getElementDAO().readElement(todoId);
+        List<Element> elements = getElementDAO().readElement(todoId);
+        Collections.sort(elements);
+        return elements;
     }
 
     @Override
