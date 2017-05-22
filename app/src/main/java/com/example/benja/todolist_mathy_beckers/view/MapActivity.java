@@ -58,7 +58,7 @@ public class MapActivity extends AppCompatActivity implements IMapActivity, OnMa
             @Override
             public void onMapClick(LatLng point) {
 
-                mapclicked(point);
+                mapClicked(point);
             }
         });
     }
@@ -85,14 +85,8 @@ public class MapActivity extends AppCompatActivity implements IMapActivity, OnMa
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
-        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
-                mGoogleApiClient);
-       /* if (mLastLocation != null) {
-            mLatitudeText.setText(String.valueOf(mLastLocation.getLatitude()));
-            mLongitudeText.setText(String.valueOf(mLastLocation.getLongitude()));
+        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
 
-
-        }*/
         if(mLastLocation != null) {
             this.map.addMarker(new MarkerOptions()
                     .position(new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude()))
@@ -107,7 +101,7 @@ public class MapActivity extends AppCompatActivity implements IMapActivity, OnMa
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
     }
-    public void mapclicked(LatLng location){
+    public void mapClicked(LatLng location){
         this.map.clear();
         if(location != null) {
             this.map.addMarker(new MarkerOptions()

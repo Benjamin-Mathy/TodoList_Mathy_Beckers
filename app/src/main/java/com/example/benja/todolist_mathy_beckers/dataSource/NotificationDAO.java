@@ -3,7 +3,6 @@ package com.example.benja.todolist_mathy_beckers.dataSource;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 
 import com.example.benja.todolist_mathy_beckers.database.NotificationTable;
 import com.example.benja.todolist_mathy_beckers.model.Notification;
@@ -11,8 +10,6 @@ import com.example.benja.todolist_mathy_beckers.model.NotificationGPS;
 import com.example.benja.todolist_mathy_beckers.model.NotificationTime;
 
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Max on 18-04-17.
@@ -80,6 +77,7 @@ public class NotificationDAO extends BaseDAO implements INotificationDAO {
 
         if( cursor != null && cursor.moveToFirst() ){
             NotificationGPS currentNotification = new NotificationGPS();
+
             currentNotification.setId(cursor.getLong(cursor.getColumnIndexOrThrow(NotificationTable.FeedEntry._ID)));
             currentNotification.setLatitude(cursor.getLong(cursor.getColumnIndexOrThrow(NotificationTable.FeedEntry.COLUMN_LATITUDE)));
             currentNotification.setLongitude(cursor.getLong(cursor.getColumnIndexOrThrow(NotificationTable.FeedEntry.COLUMN_LONGITUDE)));

@@ -82,5 +82,6 @@
             android:value="AIzaSyAABfzxD9oA8eyP4VVwJGtk1h8w7OfUxsg"/>
 
     </application>
-
+    <receiver android:name="MyBroadcastReceiver" >
+    </receiver>
 </manifest>

@@ -74,6 +74,7 @@ public class TodolistDAO extends BaseDAO implements ITodolistDAO {
         todo.setName(cursor.getString(cursor.getColumnIndexOrThrow(TodolistTable.FeedEntry.COLUMN_NAME)));
         todo.setColor(Colors.valueFor(cursor.getString(cursor.getColumnIndexOrThrow(TodolistTable.FeedEntry.COLUMN_COLOR))));
         todo.setType(TodoType.valueFor(cursor.getString(cursor.getColumnIndexOrThrow(TodolistTable.FeedEntry.COLUMN_TYPE))));
+
         todo.setNotificationTime(notificationDAO.readNotificationTime(idTodolist));
         todo.setNotificationGps(notificationDAO.readNotificationGPS(idTodolist));
         for (Element elem: elementDAO.readElement(idTodolist)) {
