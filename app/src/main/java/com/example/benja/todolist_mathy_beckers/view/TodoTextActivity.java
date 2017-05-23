@@ -18,7 +18,6 @@ import android.widget.Toast;
 import com.example.benja.todolist_mathy_beckers.R;
 import com.example.benja.todolist_mathy_beckers.adapter.TextAdapter;
 import com.example.benja.todolist_mathy_beckers.dataSource.ElementDAO;
-import com.example.benja.todolist_mathy_beckers.dataSource.NotificationDAO;
 import com.example.benja.todolist_mathy_beckers.dataSource.TodolistDAO;
 import com.example.benja.todolist_mathy_beckers.model.Element;
 import com.example.benja.todolist_mathy_beckers.presenter.ITodoTextPresenter;
@@ -37,7 +36,7 @@ import static android.provider.AlarmClock.EXTRA_MESSAGE;
 public class TodoTextActivity extends AppCompatActivity implements ITodoTextActivity {
 
     private TextAdapter adapter;
-    private ITodoTextPresenter presenter = new TodoTextPresenter(this, new TodolistDAO(this), new ElementDAO(this), new NotificationDAO(this));
+    private ITodoTextPresenter presenter = new TodoTextPresenter(this, new TodolistDAO(this), new ElementDAO(this));
 
     private ListView elements;
     private LinearLayout menu;

@@ -1,9 +1,6 @@
 package com.example.benja.todolist_mathy_beckers.presenter;
 
-import android.graphics.Color;
-
 import com.example.benja.todolist_mathy_beckers.dataSource.IElementDAO;
-import com.example.benja.todolist_mathy_beckers.dataSource.INotificationDAO;
 import com.example.benja.todolist_mathy_beckers.dataSource.ITodolistDAO;
 import com.example.benja.todolist_mathy_beckers.model.Colors;
 import com.example.benja.todolist_mathy_beckers.model.Element;
@@ -11,7 +8,6 @@ import com.example.benja.todolist_mathy_beckers.model.Todo;
 import com.example.benja.todolist_mathy_beckers.model.TodoType;
 import com.example.benja.todolist_mathy_beckers.view.IMainActivity;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -23,8 +19,8 @@ public class MainPresenter extends BasePresenter implements IMainPresenter{
 
     private IMainActivity view;
 
-    public MainPresenter(IMainActivity view, ITodolistDAO daoTodo, IElementDAO daoElem, INotificationDAO daoNotif){
-        super(daoTodo, daoElem, daoNotif);
+    public MainPresenter(IMainActivity view, ITodolistDAO daoTodo, IElementDAO daoElem){
+        super(daoTodo, daoElem);
         this.view = view;
     }
 
@@ -53,8 +49,6 @@ public class MainPresenter extends BasePresenter implements IMainPresenter{
 
     @Override
     public void removeTodo(Todo todo) {
-        getNotificationDAO().deleteNotification(getNotificationDAO().readNotificationGPS((int) todo.getId()));
-        getNotificationDAO().deleteNotification(getNotificationDAO().readNotificationTime((int) todo.getId()));
         List<Element> elements = getElementDAO().readElement((int) todo.getId());
         for (Element e : elements) {
             getElementDAO().deleteElement(e);

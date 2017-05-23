@@ -19,13 +19,11 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         TodolistTable.onCreate(db);
         ElementTable.onCreate(db);
-        NotificationTable.onCreate(db);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         TodolistTable.onUpgrade(db, oldVersion, newVersion);
         ElementTable.onUpgrade(db, oldVersion, newVersion);
-        NotificationTable.onUpgrade(db, oldVersion, newVersion);
     }
 }

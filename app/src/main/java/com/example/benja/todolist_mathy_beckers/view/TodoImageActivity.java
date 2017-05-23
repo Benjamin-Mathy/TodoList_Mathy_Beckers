@@ -1,27 +1,17 @@
 package com.example.benja.todolist_mathy_beckers.view;
 
-import android.content.ClipData;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
-import android.support.v4.content.CursorLoader;
 import android.support.v4.content.FileProvider;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -31,11 +21,8 @@ import android.widget.Toast;
 
 import com.example.benja.todolist_mathy_beckers.R;
 import com.example.benja.todolist_mathy_beckers.adapter.ImageAdapter;
-import com.example.benja.todolist_mathy_beckers.adapter.TextAdapter;
 import com.example.benja.todolist_mathy_beckers.dataSource.ElementDAO;
-import com.example.benja.todolist_mathy_beckers.dataSource.NotificationDAO;
 import com.example.benja.todolist_mathy_beckers.dataSource.TodolistDAO;
-import com.example.benja.todolist_mathy_beckers.model.Element;
 import com.example.benja.todolist_mathy_beckers.model.ElementImage;
 import com.example.benja.todolist_mathy_beckers.presenter.ITodoImagePresenter;
 import com.example.benja.todolist_mathy_beckers.presenter.TodoImagePresenter;
@@ -54,7 +41,7 @@ import java.util.List;
 public class TodoImageActivity extends AppCompatActivity implements ITodoImageActivity {
 
     private ImageAdapter adapter;
-    private ITodoImagePresenter presenter = new TodoImagePresenter(this, new TodolistDAO(this),new ElementDAO(this), new NotificationDAO(this));
+    private ITodoImagePresenter presenter = new TodoImagePresenter(this, new TodolistDAO(this),new ElementDAO(this));
 
     private static final int SELECT_PICTURE = 1;
     static final int REQUEST_IMAGE_CAPTURE = 2;

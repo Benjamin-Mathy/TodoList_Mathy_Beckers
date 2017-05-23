@@ -3,7 +3,6 @@ package com.example.benja.todolist_mathy_beckers.presenter;
 import android.app.Activity;
 
 import com.example.benja.todolist_mathy_beckers.dataSource.IElementDAO;
-import com.example.benja.todolist_mathy_beckers.dataSource.INotificationDAO;
 import com.example.benja.todolist_mathy_beckers.dataSource.ITodolistDAO;
 import com.example.benja.todolist_mathy_beckers.model.Colors;
 import com.example.benja.todolist_mathy_beckers.model.Element;
@@ -25,8 +24,8 @@ public class TodoTextPresenter extends BasePresenter implements ITodoTextPresent
 
     private int todoId;
 
-    public TodoTextPresenter(ITodoTextActivity view, ITodolistDAO daoTodo, IElementDAO daoElem, INotificationDAO daoNotif){
-        super(daoTodo, daoElem, daoNotif);
+    public TodoTextPresenter(ITodoTextActivity view, ITodolistDAO daoTodo, IElementDAO daoElem){
+        super(daoTodo, daoElem);
         this.view = view;
     }
 

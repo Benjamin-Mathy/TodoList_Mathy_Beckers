@@ -1,10 +1,8 @@
 package com.example.benja.todolist_mathy_beckers.presenter;
 
 import com.example.benja.todolist_mathy_beckers.dataSource.IElementDAO;
-import com.example.benja.todolist_mathy_beckers.dataSource.INotificationDAO;
 import com.example.benja.todolist_mathy_beckers.dataSource.ITodolistDAO;
 import com.example.benja.todolist_mathy_beckers.model.Colors;
-import com.example.benja.todolist_mathy_beckers.model.Element;
 import com.example.benja.todolist_mathy_beckers.model.ElementImage;
 import com.example.benja.todolist_mathy_beckers.model.Todo;
 import com.example.benja.todolist_mathy_beckers.view.ITodoImageActivity;
@@ -22,8 +20,8 @@ public class TodoImagePresenter extends BasePresenter implements ITodoImagePrese
 
     private int todoId;
 
-    public TodoImagePresenter(ITodoImageActivity view, ITodolistDAO daoTodo, IElementDAO daoElem, INotificationDAO daoNotif){
-        super(daoTodo, daoElem, daoNotif);
+    public TodoImagePresenter(ITodoImageActivity view, ITodolistDAO daoTodo, IElementDAO daoElem){
+        super(daoTodo, daoElem);
         this.view = view;
     }
 

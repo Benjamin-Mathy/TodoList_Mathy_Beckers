@@ -19,8 +19,6 @@ public class Todo<T extends Element>{
     private String name;
     private Colors color;
     private List<T> elements = new ArrayList<>();
-    private NotificationTime notificationTime;
-    private NotificationGPS notificationGps;
     
     public Todo() {}
 
@@ -73,21 +71,5 @@ public class Todo<T extends Element>{
 
     public void setElements(List<T> elements) {
         this.elements = elements;
-    }
-
-    public NotificationTime getNotificationTime() {
-        return notificationTime;
-    }
-
-    public void setNotificationTime(NotificationTime notificationTime) {
-        this.notificationTime = notificationTime;
-    }
-
-    public NotificationGPS getNotificationGps() {
-        return notificationGps;
-    }
-
-    public void setNotificationGps(NotificationGPS notificationGps) {
-        this.notificationGps = notificationGps;
     }
 }
