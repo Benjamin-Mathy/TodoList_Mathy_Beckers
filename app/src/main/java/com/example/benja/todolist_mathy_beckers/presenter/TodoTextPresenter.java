@@ -86,6 +86,11 @@ public class TodoTextPresenter extends BasePresenter implements ITodoTextPresent
     @Override
     public void addAlarm(Activity activity, long alarmTime) {
         notifManager = new NotifManager(activity);
-        notifManager.AddAlarm(alarmTime, getTodoDAO().readTodolistOnly(todoId));
+        notifManager.addAlarm(alarmTime, getTodoDAO().readTodolistOnly(todoId));
+    }
+    @Override
+    public void removeAlarm(Activity activity) {
+        notifManager = new NotifManager(activity);
+        notifManager.removeAlarm(getTodoDAO().readTodolistOnly(todoId));
     }
 }

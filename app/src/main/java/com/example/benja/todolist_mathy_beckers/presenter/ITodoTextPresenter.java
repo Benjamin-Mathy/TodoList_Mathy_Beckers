@@ -32,4 +32,6 @@ public interface ITodoTextPresenter {
     Colors getColor();
 
     void addAlarm(Activity activity, long alarmTime);
+
+    void removeAlarm(Activity activity);
 }

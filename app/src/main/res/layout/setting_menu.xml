@@ -101,6 +101,7 @@
         <Button
             android:background="@drawable/round_button"
             android:drawableTop="@drawable/ic_clear_24dp"
+            android:onClick="deleteNotification"
             android:paddingTop="23dp"
             android:layout_width="70dp"
             android:layout_height="70dp"

@@ -161,8 +161,12 @@ public class TodoTextActivity extends AppCompatActivity implements ITodoTextActi
         GregorianCalendar calendar = new GregorianCalendar(year,month,day, hour, minute);
 
         presenter.addAlarm(this,calendar.getTimeInMillis());
-
+        Toast.makeText(this.getBaseContext(), "Alarm is add successfully", Toast.LENGTH_SHORT).show();
         alarmMenu.setVisibility(view.INVISIBLE);
+    }
+    public void deleteNotification(View view){
+        presenter.removeAlarm(this);
+        Toast.makeText(this.getBaseContext(), "Alarm is deleted", Toast.LENGTH_SHORT).show();
     }
     public void cancelTimeNotification(View view){
         alarmMenu.setVisibility(view.INVISIBLE);

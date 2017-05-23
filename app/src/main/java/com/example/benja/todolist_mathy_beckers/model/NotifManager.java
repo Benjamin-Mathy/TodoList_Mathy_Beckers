@@ -21,7 +21,7 @@ public class NotifManager {
         this.alarmManager = (AlarmManager) activity.getApplicationContext().getSystemService(ALARM_SERVICE);
     }
 
-    public void AddAlarm(long alarmTime, Todo todolist) {
+    public void addAlarm(long alarmTime, Todo todolist) {
 
         Intent intent = new Intent(activity, AlertLauncher.class );
         intent.putExtra("name", todolist.getName());
@@ -30,7 +30,14 @@ public class NotifManager {
 
         alarmManager.set(AlarmManager.RTC_WAKEUP, alarmTime, pi);
 
-        Toast.makeText(activity.getBaseContext(), "Alarm is add successfully", Toast.LENGTH_SHORT).show();
+
+    }
+    public void removeAlarm(Todo todolist) {
+        Intent intent = new Intent(activity, AlertLauncher.class );
+        intent.putExtra("name", todolist.getName());
+        intent.putExtra("color", todolist.getColor());
+        PendingIntent pi = PendingIntent.getBroadcast(activity.getApplicationContext(), (int)todolist.getId(), intent, PendingIntent.FLAG_CANCEL_CURRENT);
+        alarmManager.cancel(pi);
     }
 }
 
