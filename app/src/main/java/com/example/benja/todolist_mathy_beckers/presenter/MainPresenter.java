@@ -66,7 +66,7 @@ public class MainPresenter extends BasePresenter implements IMainPresenter{
         List<Todo> todos = getAllTodos();
         for (Iterator<Todo> iter = todos.listIterator(); iter.hasNext(); ) {
             Todo t = iter.next();
-            if (!t.getName().contains(request)) {
+            if (!t.getName().toLowerCase().contains(request.toLowerCase())) {
                 iter.remove();
             }
         }
