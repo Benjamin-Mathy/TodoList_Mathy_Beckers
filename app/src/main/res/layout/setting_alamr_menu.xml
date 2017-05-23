@@ -23,30 +23,30 @@
 
     <Button
         android:id="@+id/ValidateNotification"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
 
-        android:layout_alignBaseline="@+id/CancelNotification"
-        android:layout_alignBottom="@+id/CancelNotification"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="13dp"
+        android:layout_marginEnd="19dp"
         android:background="@drawable/round_button"
-        android:drawableTop="@android:drawable/ic_input_add"
+        android:drawableTop="@drawable/ic_add_24dp"
         android:elevation="2dp"
         android:onClick="validateTimeNotfication"
-        android:paddingTop="19dp" />
+        android:paddingTop="19dp"
+        android:layout_alignBaseline="@+id/CancelNotification"
+        android:layout_alignBottom="@+id/CancelNotification"
+        android:layout_alignParentEnd="true" />
 
     <Button
         android:id="@+id/CancelNotification"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
 
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="17dp"
         android:layout_marginStart="20dp"
         android:background="@drawable/round_button"
-        android:drawableTop="@android:drawable/ic_delete"
+        android:drawableTop="@drawable/ic_clear_24dp"
         android:elevation="2dp"
         android:onClick="cancelTimeNotification"
         android:paddingTop="19dp" />

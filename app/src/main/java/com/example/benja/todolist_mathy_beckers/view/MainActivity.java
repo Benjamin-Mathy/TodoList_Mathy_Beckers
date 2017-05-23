@@ -47,13 +47,6 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
     private ListView todos;
     private EditText searchField;
 
-    /*
-    TODO :
-        - Images lentes
-        - Fenêtre de choix d'heure
-        + Partie notifs
-     */
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
