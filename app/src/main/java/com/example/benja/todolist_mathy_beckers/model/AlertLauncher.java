@@ -18,20 +18,22 @@ public class AlertLauncher extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
 
+
         NotificationManager mNotificationManager =
                 (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         NotificationCompat.Builder mNotifyBuilder;
         // Sets an ID for the notification, so it can be updated
         int notifyID = 1;
         mNotifyBuilder = (NotificationCompat.Builder) new NotificationCompat.Builder(context)
-                .setContentTitle("2Dew Test notif")
+                .setContentTitle(intent.getStringExtra("name"))
                 .setContentText("You've received new messages.")
+                //.setColor(Color.parseColor(intent.getStringExtra("color")))
                 .setSmallIcon(R.drawable.ic_alarm_24dp)
                 .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
         int numMessages = 0;
         // Start of a loop that processes data and then notifies the user
 
-        mNotifyBuilder.setContentText("coucou")
+        mNotifyBuilder.setContentText("2Dew")
                 .setNumber(++numMessages);
         // Because the ID remains unchanged, the existing notification is
         // updated.

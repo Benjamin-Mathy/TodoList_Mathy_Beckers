@@ -3,7 +3,6 @@ package com.example.benja.todolist_mathy_beckers.view;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.provider.SyncStateContract;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -22,10 +21,8 @@ import com.example.benja.todolist_mathy_beckers.dataSource.ElementDAO;
 import com.example.benja.todolist_mathy_beckers.dataSource.NotificationDAO;
 import com.example.benja.todolist_mathy_beckers.dataSource.TodolistDAO;
 import com.example.benja.todolist_mathy_beckers.model.Element;
-import com.example.benja.todolist_mathy_beckers.model.NotifManager;
 import com.example.benja.todolist_mathy_beckers.presenter.ITodoTextPresenter;
 import com.example.benja.todolist_mathy_beckers.presenter.TodoTextPresenter;
-import com.google.android.gms.location.Geofence;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
@@ -163,7 +160,7 @@ public class TodoTextActivity extends AppCompatActivity implements ITodoTextActi
 
         GregorianCalendar calendar = new GregorianCalendar(year,month,day, hour, minute);
 
-        presenter.addAlarm(this,calendar.getTimeInMillis(), getIntent().getIntExtra("id", -1));
+        presenter.addAlarm(this,calendar.getTimeInMillis());
 
         alarmMenu.setVisibility(view.INVISIBLE);
     }

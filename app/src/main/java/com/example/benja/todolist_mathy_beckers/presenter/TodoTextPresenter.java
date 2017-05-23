@@ -11,7 +11,6 @@ import com.example.benja.todolist_mathy_beckers.model.NotifManager;
 import com.example.benja.todolist_mathy_beckers.model.Todo;
 import com.example.benja.todolist_mathy_beckers.view.ITodoTextActivity;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -85,8 +84,8 @@ public class TodoTextPresenter extends BasePresenter implements ITodoTextPresent
     }
 
     @Override
-    public void addAlarm(Activity activity, long alarmTime, int todoId) {
+    public void addAlarm(Activity activity, long alarmTime) {
         notifManager = new NotifManager(activity);
-        notifManager.AddAlarm(alarmTime, todoId);
+        notifManager.AddAlarm(alarmTime, getTodoDAO().readTodolistOnly(todoId));
     }
 }

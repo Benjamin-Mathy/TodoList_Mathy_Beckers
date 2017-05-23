@@ -21,10 +21,12 @@ public class NotifManager {
         this.alarmManager = (AlarmManager) activity.getApplicationContext().getSystemService(ALARM_SERVICE);
     }
 
-    public void AddAlarm(long alarmTime, int todolistId) {
+    public void AddAlarm(long alarmTime, Todo todolist) {
 
         Intent intent = new Intent(activity, AlertLauncher.class );
-        PendingIntent pi = PendingIntent.getBroadcast(activity.getApplicationContext(), todolistId, intent, 0);
+        intent.putExtra("name", todolist.getName());
+        intent.putExtra("color", todolist.getColor());
+        PendingIntent pi = PendingIntent.getBroadcast(activity.getApplicationContext(), (int)todolist.getId(), intent, 0);
 
         alarmManager.set(AlarmManager.RTC_WAKEUP, alarmTime, pi);
 

@@ -1,7 +1,6 @@
 package com.example.benja.todolist_mathy_beckers.presenter;
 
 import android.app.Activity;
-import android.graphics.Color;
 
 import com.example.benja.todolist_mathy_beckers.model.Colors;
 import com.example.benja.todolist_mathy_beckers.model.Element;
@@ -32,5 +31,5 @@ public interface ITodoTextPresenter {
 
     Colors getColor();
 
-    void addAlarm(Activity activity, long alarmTime, int todoid);
+    void addAlarm(Activity activity, long alarmTime);
 }
