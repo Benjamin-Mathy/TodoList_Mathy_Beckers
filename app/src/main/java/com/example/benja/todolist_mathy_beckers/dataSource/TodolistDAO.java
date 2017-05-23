@@ -3,10 +3,8 @@ package com.example.benja.todolist_mathy_beckers.dataSource;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-
 import com.example.benja.todolist_mathy_beckers.database.TodolistTable;
 import com.example.benja.todolist_mathy_beckers.model.Colors;
-import com.example.benja.todolist_mathy_beckers.model.Element;
 import com.example.benja.todolist_mathy_beckers.model.Todo;
 import com.example.benja.todolist_mathy_beckers.model.TodoType;
 
@@ -58,39 +56,7 @@ public class TodolistDAO extends BaseDAO implements ITodolistDAO {
     }
 
     @Override
-    public Todo readTodolist(int idTodolist) {
-        openR();
-        ElementDAO elementDAO = new ElementDAO(this.context);
-
-        Cursor cursor = getTodo(idTodolist);
-
-
-        Todo todo = new Todo();
-
-        cursor.moveToFirst();
-
-        todo.setId(cursor.getLong(cursor.getColumnIndexOrThrow(TodolistTable.FeedEntry._ID)));
-        todo.setName(cursor.getString(cursor.getColumnIndexOrThrow(TodolistTable.FeedEntry.COLUMN_NAME)));
-        todo.setColor(Colors.valueFor(cursor.getString(cursor.getColumnIndexOrThrow(TodolistTable.FeedEntry.COLUMN_COLOR))));
-        todo.setType(TodoType.valueFor(cursor.getString(cursor.getColumnIndexOrThrow(TodolistTable.FeedEntry.COLUMN_TYPE))));
-
-        for (Element elem: elementDAO.readElement(idTodolist)) {
-            todo.add(elem);
-        }
-        for (Element elem: elementDAO.readElementImage(idTodolist)) {
-            todo.add(elem);
-        }
-        for (Element elem: elementDAO.readElementSon(idTodolist)) {
-            todo.add(elem);
-        }
-
-        cursor.close();
-        close();
-        return todo;
-    }
-
-    @Override
-    public Todo readTodolistOnly(int idTodolist){
+    public Todo readTodolist(int idTodolist){
         openR();
 
         Cursor cursor = getTodo(idTodolist);

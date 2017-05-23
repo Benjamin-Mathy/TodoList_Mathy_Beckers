@@ -1,8 +1,5 @@
 package com.example.benja.todolist_mathy_beckers.model;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * Created by Max on 13-04-17.
  */

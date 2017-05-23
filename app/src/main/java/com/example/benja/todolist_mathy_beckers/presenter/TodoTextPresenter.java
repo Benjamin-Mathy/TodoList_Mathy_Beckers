@@ -1,7 +1,6 @@
 package com.example.benja.todolist_mathy_beckers.presenter;
 
 import android.app.Activity;
-
 import com.example.benja.todolist_mathy_beckers.dataSource.IElementDAO;
 import com.example.benja.todolist_mathy_beckers.dataSource.ITodolistDAO;
 import com.example.benja.todolist_mathy_beckers.model.Colors;
@@ -9,7 +8,6 @@ import com.example.benja.todolist_mathy_beckers.model.Element;
 import com.example.benja.todolist_mathy_beckers.model.NotifManager;
 import com.example.benja.todolist_mathy_beckers.model.Todo;
 import com.example.benja.todolist_mathy_beckers.view.ITodoTextActivity;
-
 import java.util.Collections;
 import java.util.List;
 
@@ -60,36 +58,37 @@ public class TodoTextPresenter extends BasePresenter implements ITodoTextPresent
 
     @Override
     public void setTitle(String title){
-        Todo todo = getTodoDAO().readTodolistOnly(todoId);
+        Todo todo = getTodoDAO().readTodolist(todoId);
         todo.setName(title);
         getTodoDAO().updateTodolist(todo);
     }
 
     @Override
     public String getTitle(){
-        return getTodoDAO().readTodolistOnly(todoId).getName();
+        return getTodoDAO().readTodolist(todoId).getName();
     }
 
     @Override
     public void setColor(String tag) {
-        Todo todo = getTodoDAO().readTodolistOnly(todoId);
+        Todo todo = getTodoDAO().readTodolist(todoId);
         todo.setColor(Colors.valueOf(tag));
         getTodoDAO().updateTodolist(todo);
     }
 
     @Override
     public Colors getColor() {
-        return getTodoDAO().readTodolistOnly(todoId).getColor();
+        return getTodoDAO().readTodolist(todoId).getColor();
     }
 
     @Override
     public void addAlarm(Activity activity, long alarmTime) {
         notifManager = new NotifManager(activity);
-        notifManager.addAlarm(alarmTime, getTodoDAO().readTodolistOnly(todoId));
+        notifManager.addAlarm(alarmTime, getTodoDAO().readTodolist(todoId));
     }
+
     @Override
     public void removeAlarm(Activity activity) {
         notifManager = new NotifManager(activity);
-        notifManager.removeAlarm(getTodoDAO().readTodolistOnly(todoId));
+        notifManager.removeAlarm(getTodoDAO().readTodolist(todoId));
     }
 }

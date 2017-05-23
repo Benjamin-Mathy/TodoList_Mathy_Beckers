@@ -5,6 +5,4 @@ package com.example.benja.todolist_mathy_beckers.view;
  */
 
 public interface ITodoImageActivity {
-
-
 }

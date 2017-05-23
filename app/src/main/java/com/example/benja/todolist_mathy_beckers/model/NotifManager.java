@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Intent;
-import android.widget.Toast;
 
 import static android.content.Context.ALARM_SERVICE;
 
@@ -29,8 +28,6 @@ public class NotifManager {
         PendingIntent pi = PendingIntent.getBroadcast(activity.getApplicationContext(), (int)todolist.getId(), intent, 0);
 
         alarmManager.set(AlarmManager.RTC_WAKEUP, alarmTime, pi);
-
-
     }
     public void removeAlarm(Todo todolist) {
         Intent intent = new Intent(activity, AlertLauncher.class );

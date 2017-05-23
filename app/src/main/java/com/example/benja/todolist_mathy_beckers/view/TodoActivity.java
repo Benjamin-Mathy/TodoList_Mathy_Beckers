@@ -8,7 +8,6 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 import com.example.benja.todolist_mathy_beckers.R;
 

@@ -7,7 +7,6 @@ import com.example.benja.todolist_mathy_beckers.model.Element;
 import com.example.benja.todolist_mathy_beckers.model.Todo;
 import com.example.benja.todolist_mathy_beckers.model.TodoType;
 import com.example.benja.todolist_mathy_beckers.view.IMainActivity;
-
 import java.util.Iterator;
 import java.util.List;
 

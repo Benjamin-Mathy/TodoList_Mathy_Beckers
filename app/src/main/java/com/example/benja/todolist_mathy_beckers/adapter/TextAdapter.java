@@ -6,12 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
-
 import com.example.benja.todolist_mathy_beckers.R;
 import com.example.benja.todolist_mathy_beckers.model.Element;
-import com.example.benja.todolist_mathy_beckers.model.ElementImage;
 
 import java.util.List;
 

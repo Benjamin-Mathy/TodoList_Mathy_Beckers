@@ -3,7 +3,6 @@ package com.example.benja.todolist_mathy_beckers.dataSource;
 import android.content.Context;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-
 import com.example.benja.todolist_mathy_beckers.database.DBHelper;
 
 /**

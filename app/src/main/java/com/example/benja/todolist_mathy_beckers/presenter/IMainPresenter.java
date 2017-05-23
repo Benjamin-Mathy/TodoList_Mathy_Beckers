@@ -1,10 +1,7 @@
 package com.example.benja.todolist_mathy_beckers.presenter;
 
-import android.text.Editable;
-
 import com.example.benja.todolist_mathy_beckers.model.Todo;
 import com.example.benja.todolist_mathy_beckers.model.TodoType;
-
 import java.util.List;
 
 /**

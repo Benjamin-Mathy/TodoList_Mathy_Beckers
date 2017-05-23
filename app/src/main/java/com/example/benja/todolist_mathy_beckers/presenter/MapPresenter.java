@@ -3,7 +3,6 @@ package com.example.benja.todolist_mathy_beckers.presenter;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-
 import com.example.benja.todolist_mathy_beckers.model.MapManager;
 import com.google.android.gms.maps.MapFragment;
 

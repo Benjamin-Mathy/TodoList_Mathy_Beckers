@@ -4,8 +4,6 @@ package com.example.benja.todolist_mathy_beckers.model;
  * Created by Max on 10-04-17.
  */
 
-import java.util.Objects;
-
 /**
  * Classe représentant un élément textuel de todolist
  */
@@ -20,10 +18,6 @@ public class Element implements Comparable<Element>{
     public Element(String text, int index){
         this.text = text;
         this.index = index;
-    }
-
-    public void editText(String text){
-        this.text = text;
     }
 
     public long getId(){return this.id;}

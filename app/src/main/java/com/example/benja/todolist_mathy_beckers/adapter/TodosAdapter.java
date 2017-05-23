@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.example.benja.todolist_mathy_beckers.R;
 import com.example.benja.todolist_mathy_beckers.model.Todo;
 

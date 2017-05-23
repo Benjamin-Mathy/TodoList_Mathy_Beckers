@@ -4,8 +4,6 @@ package com.example.benja.todolist_mathy_beckers.model;
  * Created by Max on 10-04-17.
  */
 
-import android.graphics.Color;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,16 +55,8 @@ public class Todo<T extends Element>{
         elements.add(element);
     }
 
-    public void delete(T element){
-        elements.remove(element);
-    }
-
     public List<T> getElements(){
         return elements;
-    }
-
-    public T getElement(int index){
-        return elements.get(index);
     }
 
     public void setElements(List<T> elements) {

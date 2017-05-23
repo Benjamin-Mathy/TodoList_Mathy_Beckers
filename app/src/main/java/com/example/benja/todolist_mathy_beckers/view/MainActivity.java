@@ -14,8 +14,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
-
 import com.example.benja.todolist_mathy_beckers.R;
 import com.example.benja.todolist_mathy_beckers.adapter.TodosAdapter;
 import com.example.benja.todolist_mathy_beckers.dataSource.ElementDAO;
@@ -24,7 +22,6 @@ import com.example.benja.todolist_mathy_beckers.model.Todo;
 import com.example.benja.todolist_mathy_beckers.model.TodoType;
 import com.example.benja.todolist_mathy_beckers.presenter.IMainPresenter;
 import com.example.benja.todolist_mathy_beckers.presenter.MainPresenter;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,7 +40,6 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        ActionBar actionBar = getSupportActionBar();
 
         askAllPermissions();
         createList(presenter.getAllTodos());

@@ -3,13 +3,9 @@ package com.example.benja.todolist_mathy_beckers.dataSource;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.media.Image;
-
 import com.example.benja.todolist_mathy_beckers.database.ElementTable;
 import com.example.benja.todolist_mathy_beckers.model.Element;
 import com.example.benja.todolist_mathy_beckers.model.ElementImage;
-
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +23,6 @@ public class ElementDAO extends BaseDAO implements IElementDAO {
         openW();
         ContentValues values = new ContentValues();
 
-        //values.put(ElementTable.FeedEntry._ID, element.getId());
         values.put(ElementTable.FeedEntry.COLUMN_TEXT, element.getText());
         values.put(ElementTable.FeedEntry.COLUMN_INDEX, element.getIndex());
         values.put(ElementTable.FeedEntry.COLUMN_FK_TODOLIST, idTodo);
@@ -44,7 +39,6 @@ public class ElementDAO extends BaseDAO implements IElementDAO {
 
         ContentValues values = new ContentValues();
 
-        //values.put(ElementTable.FeedEntry._ID, element.getId());
         values.put(ElementTable.FeedEntry.COLUMN_TEXT, element.getText());
         values.put(ElementTable.FeedEntry.COLUMN_INDEX, element.getIndex());
         values.put(ElementTable.FeedEntry.COLUMN_FK_TODOLIST, idTodo);
@@ -95,11 +89,6 @@ public class ElementDAO extends BaseDAO implements IElementDAO {
     }
 
     @Override
-    public List<Element> readElementSon(int idTodolist) {
-        return null;
-    }
-
-    @Override
     public void updateElement(Element element, int idTodo) {
         openW();
 
@@ -119,6 +108,7 @@ public class ElementDAO extends BaseDAO implements IElementDAO {
 
         close();
     }
+
     @Override
     public void updateElement(ElementImage element, int idTodo) {
         openW();

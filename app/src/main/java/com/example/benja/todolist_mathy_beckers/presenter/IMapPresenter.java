@@ -2,7 +2,6 @@ package com.example.benja.todolist_mathy_beckers.presenter;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-
 import com.google.android.gms.maps.MapFragment;
 
 /**

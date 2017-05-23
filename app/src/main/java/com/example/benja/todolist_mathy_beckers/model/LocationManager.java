@@ -3,7 +3,6 @@ package com.example.benja.todolist_mathy_beckers.model;
 import android.app.Activity;
 
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.LocationServices;
 
 
 /**
@@ -16,7 +15,5 @@ public class LocationManager  {
 
     public LocationManager (Activity activity){
         this.activity = activity;
-
-
     }
 }
