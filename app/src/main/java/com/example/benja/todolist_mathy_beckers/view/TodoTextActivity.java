@@ -1,41 +1,34 @@
 package com.example.benja.todolist_mathy_beckers.view;
 
-import android.app.NotificationManager;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.media.RingtoneManager;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
+import android.provider.SyncStateContract;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.app.NotificationCompat;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.benja.todolist_mathy_beckers.R;
 import com.example.benja.todolist_mathy_beckers.adapter.TextAdapter;
-import com.example.benja.todolist_mathy_beckers.adapter.TodosAdapter;
 import com.example.benja.todolist_mathy_beckers.dataSource.ElementDAO;
 import com.example.benja.todolist_mathy_beckers.dataSource.NotificationDAO;
 import com.example.benja.todolist_mathy_beckers.dataSource.TodolistDAO;
 import com.example.benja.todolist_mathy_beckers.model.Element;
-import com.example.benja.todolist_mathy_beckers.model.Todo;
-import com.example.benja.todolist_mathy_beckers.model.TodoType;
-import com.example.benja.todolist_mathy_beckers.presenter.IMainPresenter;
+import com.example.benja.todolist_mathy_beckers.model.NotifManager;
 import com.example.benja.todolist_mathy_beckers.presenter.ITodoTextPresenter;
-import com.example.benja.todolist_mathy_beckers.presenter.MainPresenter;
 import com.example.benja.todolist_mathy_beckers.presenter.TodoTextPresenter;
+import com.google.android.gms.location.Geofence;
 
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import static android.provider.AlarmClock.EXTRA_MESSAGE;
@@ -51,9 +44,12 @@ public class TodoTextActivity extends AppCompatActivity implements ITodoTextActi
 
     private ListView elements;
     private LinearLayout menu;
+    private LinearLayout alarmMenu;
     private RelativeLayout layout;
     private EditText titleEdit;
     private Button openMenu;
+    private TimePicker timePicker;
+    private DatePicker datePicker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +58,11 @@ public class TodoTextActivity extends AppCompatActivity implements ITodoTextActi
         menu = (LinearLayout) findViewById(R.id.settings_menu);
         openMenu = (Button) findViewById(R.id.parametersMenu);
         presenter.setTodoId(getIntent().getIntExtra("id", -1));
+
+        alarmMenu = (LinearLayout) findViewById(R.id.settings_timeNotification);
+        timePicker = (TimePicker) findViewById(R.id.tp_time);
+        timePicker.setIs24HourView(true);
+        datePicker = (DatePicker) findViewById(R.id.dp_date);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -150,32 +151,45 @@ public class TodoTextActivity extends AppCompatActivity implements ITodoTextActi
         Toast.makeText(this, R.string.color_changed, Toast.LENGTH_SHORT).show();
         setBackgroundColor();
     }
+    public void selectTimeAlarm(View view){
+        alarmMenu.setVisibility(view.VISIBLE);
+    }
+    public void validateTimeNotfication(View view){
+        int year = datePicker.getYear();
+        int month = datePicker.getMonth();
+        int day = datePicker.getDayOfMonth();
+        int hour = timePicker.getCurrentHour();
+        int minute = timePicker.getCurrentMinute();
+
+        GregorianCalendar calendar = new GregorianCalendar(year,month,day, hour, minute);
+
+        presenter.addAlarm(this,calendar.getTimeInMillis(), getIntent().getIntExtra("id", -1));
+
+        alarmMenu.setVisibility(view.INVISIBLE);
+    }
+    public void cancelTimeNotification(View view){
+        alarmMenu.setVisibility(view.INVISIBLE);
+    }
 
     public void selectGpsLocation(View view) {
-        NotificationManager mNotificationManager =
-                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        NotificationCompat.Builder mNotifyBuilder;
-// Sets an ID for the notification, so it can be updated
-        int notifyID = 1;
-        mNotifyBuilder = (NotificationCompat.Builder) new NotificationCompat.Builder(this)
-                .setContentTitle("2Dew Test notif")
-                .setContentText("You've received new messages.")
-                .setSmallIcon(R.drawable.cast_ic_notification_1)
-                .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
-        int numMessages = 0;
-// Start of a loop that processes data and then notifies the user
-
-        mNotifyBuilder.setContentText("coucou")
-                .setNumber(++numMessages);
-        // Because the ID remains unchanged, the existing notification is
-        // updated.
-        mNotificationManager.notify(
-                notifyID,
-                mNotifyBuilder.build());
-
         //TODO  Open map activity
         Intent intent = new Intent(this, MapActivity.class);
         intent.putExtra(EXTRA_MESSAGE, "test");
         startActivity(intent);
+
+        /*mGeofenceList.add(new Geofence.Builder()
+                // Set the request ID of the geofence. This is a string to identify this
+                // geofence.
+                .setRequestId(entry.getKey())
+
+                .setCircularRegion(
+                        entry.getValue().latitude,
+                        entry.getValue().longitude,
+                        Constants.GEOFENCE_RADIUS_IN_METERS
+                )
+                .setExpirationDuration(SyncStateContract.Constants.GEOFENCE_EXPIRATION_IN_MILLISECONDS)
+                .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER |
+                        Geofence.GEOFENCE_TRANSITION_EXIT)
+                .build());*/
     }
 }

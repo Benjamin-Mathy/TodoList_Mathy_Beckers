@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="500dp"
+    android:background="@color/colorPrimary">
+    <DatePicker
+        android:id="@+id/dp_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:datePickerMode="spinner"
+        android:calendarViewShown="false"
+        />
+
+    <TimePicker
+        android:id="@+id/tp_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/dp_date"
+        android:timePickerMode="spinner"
+        />
+
+    <Button
+        android:id="@+id/ValidateNotification"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+
+        android:layout_alignBaseline="@+id/CancelNotification"
+        android:layout_alignBottom="@+id/CancelNotification"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="13dp"
+        android:background="@drawable/round_button"
+        android:drawableTop="@android:drawable/ic_input_add"
+        android:elevation="2dp"
+        android:onClick="validateTimeNotfication"
+        android:paddingTop="19dp" />
+
+    <Button
+        android:id="@+id/CancelNotification"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="17dp"
+        android:layout_marginStart="20dp"
+        android:background="@drawable/round_button"
+        android:drawableTop="@android:drawable/ic_delete"
+        android:elevation="2dp"
+        android:onClick="cancelTimeNotification"
+        android:paddingTop="19dp" />
+
+</RelativeLayout>

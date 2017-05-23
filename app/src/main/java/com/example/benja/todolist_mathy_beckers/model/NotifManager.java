@@ -1,0 +1,35 @@
+package com.example.benja.todolist_mathy_beckers.model;
+
+import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Intent;
+import android.widget.Toast;
+
+import static android.content.Context.ALARM_SERVICE;
+
+/**
+ * Created by Benja on 16-05-17.
+ */
+
+public class NotifManager {
+    public AlarmManager alarmManager;
+    Activity activity;
+
+    public NotifManager(Activity activity) {
+        this.activity = activity;
+        this.alarmManager = (AlarmManager) activity.getApplicationContext().getSystemService(ALARM_SERVICE);
+    }
+
+    public void AddAlarm(long alarmTime, int todolistId) {
+
+        Intent intent = new Intent(activity, AlertLauncher.class );
+        PendingIntent pi = PendingIntent.getBroadcast(activity.getApplicationContext(), todolistId, intent, 0);
+
+        alarmManager.set(AlarmManager.RTC_WAKEUP, alarmTime, pi);
+
+        Toast.makeText(activity.getBaseContext(), "Alarm is add successfully", Toast.LENGTH_SHORT).show();
+    }
+}
+
+
