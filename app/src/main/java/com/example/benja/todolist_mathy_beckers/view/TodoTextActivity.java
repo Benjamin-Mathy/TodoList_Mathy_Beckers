@@ -33,48 +33,26 @@ import static android.provider.AlarmClock.EXTRA_MESSAGE;
  * Created by Max on 12-04-17.
  */
 
-public class TodoTextActivity extends AppCompatActivity implements ITodoTextActivity {
+public class TodoTextActivity extends TodoActivity implements ITodoTextActivity {
 
     private TextAdapter adapter;
     private ITodoTextPresenter presenter = new TodoTextPresenter(this, new TodolistDAO(this), new ElementDAO(this));
 
     private ListView elements;
-    private LinearLayout menu;
-    private LinearLayout alarmMenu;
     private RelativeLayout layout;
-    private EditText titleEdit;
-    private Button openMenu;
-    private TimePicker timePicker;
-    private DatePicker datePicker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_textlist);
-        menu = (LinearLayout) findViewById(R.id.settings_menu);
-        openMenu = (Button) findViewById(R.id.parametersMenu);
+        super.onCreate(savedInstanceState);
         presenter.setTodoId(getIntent().getIntExtra("id", -1));
-
-        alarmMenu = (LinearLayout) findViewById(R.id.settings_timeNotification);
-        timePicker = (TimePicker) findViewById(R.id.tp_time);
-        timePicker.setIs24HourView(true);
-        datePicker = (DatePicker) findViewById(R.id.dp_date);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_back_24dp);
 
-        titleEdit = (EditText) findViewById(R.id.listTitle);
         titleEdit.setText(presenter.getTitle());
-        titleEdit.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
-                    saveTitle();
-                }
-            }
-        });
 
         createList();
         setBackgroundColor();
@@ -104,6 +82,7 @@ public class TodoTextActivity extends AppCompatActivity implements ITodoTextActi
         layout.setBackgroundColor(Color.parseColor(presenter.getColor().toString()));
     }
 
+    @Override
     public void saveTitle(){
         presenter.setTitle(titleEdit.getText().toString());
     }
@@ -131,65 +110,28 @@ public class TodoTextActivity extends AppCompatActivity implements ITodoTextActi
         onResume();
     }
 
-    public void openMenu(View view) {
-        if(menu.getVisibility() == View.VISIBLE){
-            menu.setVisibility(View.INVISIBLE);
-            openMenu.setBackground(getDrawable(R.drawable.round_button));
-        }else{
-            menu.setVisibility(View.VISIBLE);
-            openMenu.setBackground(getDrawable(R.drawable.round_button_selected));
-        }
-    }
-
     public void chooseColor(View view){
         String tag = (String) view.getTag();
         presenter.setColor(tag);
         Toast.makeText(this, R.string.color_changed, Toast.LENGTH_SHORT).show();
         setBackgroundColor();
     }
-    public void selectTimeAlarm(View view){
-        alarmMenu.setVisibility(view.VISIBLE);
-    }
-    public void validateTimeNotfication(View view){
-        int year = datePicker.getYear();
-        int month = datePicker.getMonth();
-        int day = datePicker.getDayOfMonth();
-        int hour = timePicker.getCurrentHour();
-        int minute = timePicker.getCurrentMinute();
 
-        GregorianCalendar calendar = new GregorianCalendar(year,month,day, hour, minute);
-
+    @Override
+    public void validateTimeNotification(View view){
+        super.validateTimeNotification(view);
         presenter.addAlarm(this,calendar.getTimeInMillis());
-        Toast.makeText(this.getBaseContext(), "Alarm is add successfully", Toast.LENGTH_SHORT).show();
-        alarmMenu.setVisibility(view.INVISIBLE);
-    }
-    public void deleteNotification(View view){
-        presenter.removeAlarm(this);
-        Toast.makeText(this.getBaseContext(), "Alarm is deleted", Toast.LENGTH_SHORT).show();
-    }
-    public void cancelTimeNotification(View view){
-        alarmMenu.setVisibility(view.INVISIBLE);
+        Toast.makeText(this.getBaseContext(), R.string.alarm_add, Toast.LENGTH_SHORT).show();
     }
 
     public void selectGpsLocation(View view) {
-        //TODO  Open map activity
         Intent intent = new Intent(this, MapActivity.class);
         intent.putExtra(EXTRA_MESSAGE, "test");
         startActivity(intent);
+    }
 
-        /*mGeofenceList.add(new Geofence.Builder()
-                // Set the request ID of the geofence. This is a string to identify this
-                // geofence.
-                .setRequestId(entry.getKey())
-
-                .setCircularRegion(
-                        entry.getValue().latitude,
-                        entry.getValue().longitude,
-                        Constants.GEOFENCE_RADIUS_IN_METERS
-                )
-                .setExpirationDuration(SyncStateContract.Constants.GEOFENCE_EXPIRATION_IN_MILLISECONDS)
-                .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER |
-                        Geofence.GEOFENCE_TRANSITION_EXIT)
-                .build());*/
+    public void deleteNotification(View view){
+        presenter.removeAlarm(this);
+        Toast.makeText(this.getBaseContext(), R.string.alarm_del, Toast.LENGTH_SHORT).show();
     }
 }

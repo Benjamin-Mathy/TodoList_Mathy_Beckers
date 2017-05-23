@@ -7,5 +7,7 @@
     <string name="search">Search</string>
     <string name="cancel">Action canceled</string>
     <string name="color_changed">Color changed !</string>
+    <string name="alarm_add">Alarm added successfully !</string>
+    <string name="alarm_del">Alarm deleted.</string>
     <string name="not_available">This feature is not available yet :(.</string>
 </resources>

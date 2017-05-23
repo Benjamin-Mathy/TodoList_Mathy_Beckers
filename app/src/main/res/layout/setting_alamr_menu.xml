@@ -30,7 +30,7 @@
         android:background="@drawable/round_button"
         android:drawableTop="@drawable/ic_add_24dp"
         android:elevation="2dp"
-        android:onClick="validateTimeNotfication"
+        android:onClick="validateTimeNotification"
         android:paddingTop="19dp"
         android:layout_alignBaseline="@+id/CancelNotification"
         android:layout_alignBottom="@+id/CancelNotification"
@@ -48,7 +48,7 @@
         android:background="@drawable/round_button"
         android:drawableTop="@drawable/ic_clear_24dp"
         android:elevation="2dp"
-        android:onClick="cancelTimeNotification"
+        android:onClick="closeSettingsNotification"
         android:paddingTop="19dp" />
 
 </RelativeLayout>

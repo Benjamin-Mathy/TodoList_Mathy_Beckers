@@ -1,9 +1,12 @@
 package com.example.benja.todolist_mathy_beckers.presenter;
 
+import android.app.Activity;
+
 import com.example.benja.todolist_mathy_beckers.dataSource.IElementDAO;
 import com.example.benja.todolist_mathy_beckers.dataSource.ITodolistDAO;
 import com.example.benja.todolist_mathy_beckers.model.Colors;
 import com.example.benja.todolist_mathy_beckers.model.ElementImage;
+import com.example.benja.todolist_mathy_beckers.model.NotifManager;
 import com.example.benja.todolist_mathy_beckers.model.Todo;
 import com.example.benja.todolist_mathy_beckers.view.ITodoImageActivity;
 
@@ -17,6 +20,7 @@ import java.util.List;
 public class TodoImagePresenter extends BasePresenter implements ITodoImagePresenter {
 
     ITodoImageActivity view;
+    NotifManager notifManager;
 
     private int todoId;
 
@@ -79,5 +83,17 @@ public class TodoImagePresenter extends BasePresenter implements ITodoImagePrese
     @Override
     public Colors getColor() {
         return getTodoDAO().readTodolistOnly(todoId).getColor();
+    }
+
+    @Override
+    public void addAlarm(Activity activity, long alarmTime) {
+        notifManager = new NotifManager(activity);
+        notifManager.addAlarm(alarmTime, getTodoDAO().readTodolistOnly(todoId));
+    }
+
+    @Override
+    public void removeAlarm(Activity activity) {
+        notifManager = new NotifManager(activity);
+        notifManager.removeAlarm(getTodoDAO().readTodolistOnly(todoId));
     }
 }

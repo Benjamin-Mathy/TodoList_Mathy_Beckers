@@ -1,10 +1,12 @@
 package com.example.benja.todolist_mathy_beckers.presenter;
 
+import android.app.Activity;
 import android.net.Uri;
 
 import com.example.benja.todolist_mathy_beckers.model.Colors;
 import com.example.benja.todolist_mathy_beckers.model.Element;
 import com.example.benja.todolist_mathy_beckers.model.ElementImage;
+import com.example.benja.todolist_mathy_beckers.view.TodoImageActivity;
 
 import java.util.List;
 
@@ -31,4 +33,8 @@ public interface ITodoImagePresenter {
     String getTitle();
 
     Colors getColor();
+
+    void addAlarm(Activity activity, long alarmTime);
+
+    void removeAlarm(Activity activity);
 }

@@ -159,6 +159,4 @@ public class MapActivity extends AppCompatActivity implements IMapActivity, Goog
     public void cancelLocation(View view){
         this.finish();
     }
-
-
 }
