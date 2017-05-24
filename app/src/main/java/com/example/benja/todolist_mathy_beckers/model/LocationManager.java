@@ -8,7 +8,6 @@ import com.google.android.gms.common.api.GoogleApiClient;
 /**
  * Created by Youba on 08/05/2017.
  */
-
 public class LocationManager  {
     private Activity activity;
     private GoogleApiClient mGoogleApiClient;

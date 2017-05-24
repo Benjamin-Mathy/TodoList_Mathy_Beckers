@@ -11,7 +11,6 @@ import com.example.benja.todolist_mathy_beckers.R;
 /**
  * Created by Youba on 22/05/2017.
  */
-
 public class AlertLauncher extends BroadcastReceiver {
 
     @Override
@@ -36,7 +35,6 @@ public class AlertLauncher extends BroadcastReceiver {
         mNotificationManager.notify(
                 notifyID,
                 mNotifyBuilder.build());
-
     }
 }
 

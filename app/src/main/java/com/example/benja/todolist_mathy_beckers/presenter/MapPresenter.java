@@ -9,7 +9,6 @@ import com.google.android.gms.maps.MapFragment;
 /**
  * Created by Benja on 23-05-17.
  */
-
 public class MapPresenter implements IMapPresenter {
     MapManager mapManager;
     Activity activity;

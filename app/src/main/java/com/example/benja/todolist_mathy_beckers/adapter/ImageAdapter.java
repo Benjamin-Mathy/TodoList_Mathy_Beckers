@@ -17,7 +17,6 @@ import java.util.List;
 /**
  * Created by Max on 29-04-17.
  */
-
 public class ImageAdapter extends BaseAdapter {
 
     private Context context;
@@ -52,9 +51,8 @@ public class ImageAdapter extends BaseAdapter {
         et.setText(elements.get(position).getText());
 
         ImageView iv = (ImageView)v.findViewById(R.id.elementImage);
-        //iv.setImageURI(null);
-        //iv.setImageURI(Uri.parse(elements.get(position).getImage()));
 
+        //Utilisation de Picasso pour charger les images dans des threads séparés et les redimensioner.
         Picasso.with(context)
                 .load("file://" + Uri.parse(elements.get(position).getImage())).fit().centerInside()
                 .into(iv);

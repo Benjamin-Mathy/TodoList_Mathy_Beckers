@@ -6,7 +6,6 @@ import android.provider.BaseColumns;
 /**
  * Created by Max on 18-04-17.
  */
-
 public class ElementTable {
     public static class FeedEntry implements BaseColumns {
         public static final String TABLE_NAME = "elements";
@@ -29,8 +28,7 @@ public class ElementTable {
             + "foreign key("+FeedEntry.COLUMN_FK_TODOLIST+") references "+TodolistTable.GetTableName()+"("+TodolistTable.GetIdName()+")"
             + ");";
 
-    private static final String SQL_DELETE_ENTRIES =
-            "DROP TABLE IF EXISTS " + FeedEntry.TABLE_NAME;
+    private static final String SQL_DELETE_ENTRIES = "DROP TABLE IF EXISTS " + FeedEntry.TABLE_NAME;
 
     public static void onCreate(SQLiteDatabase database) {
         database.execSQL(DATABASE_CREATE);

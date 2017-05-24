@@ -8,28 +8,17 @@ import java.util.List;
 /**
  * Created by Max on 14-04-17.
  */
-
 public interface ITodoTextPresenter {
 
     List<Element> getAllElements();
-
     void setTodoId(int id);
-
     void addElement();
-
     void removeElement(Element element);
-
     void saveElements(List<Element> elements);
-
     void setTitle(String title);
-
     String getTitle();
-
     void setColor(String tag);
-
     Colors getColor();
-
     void addAlarm(Activity activity, long alarmTime);
-
     void removeAlarm(Activity activity);
 }

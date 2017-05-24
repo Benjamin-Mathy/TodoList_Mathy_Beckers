@@ -1,9 +1,12 @@
 package com.example.benja.todolist_mathy_beckers.presenter;
 
+import android.app.Activity;
+
 import com.example.benja.todolist_mathy_beckers.dataSource.IElementDAO;
 import com.example.benja.todolist_mathy_beckers.dataSource.ITodolistDAO;
 import com.example.benja.todolist_mathy_beckers.model.Colors;
 import com.example.benja.todolist_mathy_beckers.model.Element;
+import com.example.benja.todolist_mathy_beckers.model.NotifManager;
 import com.example.benja.todolist_mathy_beckers.model.Todo;
 import com.example.benja.todolist_mathy_beckers.model.TodoType;
 import com.example.benja.todolist_mathy_beckers.view.IMainActivity;
@@ -13,7 +16,6 @@ import java.util.List;
 /**
  * Created by Max on 13-04-17.
  */
-
 public class MainPresenter extends BasePresenter implements IMainPresenter{
 
     private IMainActivity view;
@@ -47,11 +49,13 @@ public class MainPresenter extends BasePresenter implements IMainPresenter{
     }
 
     @Override
-    public void removeTodo(Todo todo) {
+    public void removeTodo(Todo todo, Activity activity) {
         List<Element> elements = getElementDAO().readElement((int) todo.getId());
         for (Element e : elements) {
             getElementDAO().deleteElement(e);
         }
+        NotifManager manager = new NotifManager(activity);
+        manager.removeAlarm(getTodoDAO().readTodolist((int) todo.getId()));
         getTodoDAO().deleteTodolist(todo);
     }
 

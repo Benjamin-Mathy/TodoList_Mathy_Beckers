@@ -1,5 +1,6 @@
 package com.example.benja.todolist_mathy_beckers.view;
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
@@ -9,13 +10,11 @@ import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
-
 import com.example.benja.todolist_mathy_beckers.R;
 import com.example.benja.todolist_mathy_beckers.adapter.ImageAdapter;
 import com.example.benja.todolist_mathy_beckers.dataSource.ElementDAO;
@@ -23,20 +22,17 @@ import com.example.benja.todolist_mathy_beckers.dataSource.TodolistDAO;
 import com.example.benja.todolist_mathy_beckers.model.ElementImage;
 import com.example.benja.todolist_mathy_beckers.presenter.ITodoImagePresenter;
 import com.example.benja.todolist_mathy_beckers.presenter.TodoImagePresenter;
-
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import static android.provider.AlarmClock.EXTRA_MESSAGE;
 
 /**
  * Created by Max on 12-04-17.
  */
-
 public class TodoImageActivity extends TodoActivity implements ITodoImageActivity {
 
     private ImageAdapter adapter;
@@ -56,11 +52,6 @@ public class TodoImageActivity extends TodoActivity implements ITodoImageActivit
         setContentView(R.layout.activity_imagelist);
         super.onCreate(savedInstanceState);
         presenter.setTodoId(getIntent().getIntExtra("id", -1));
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_back_24dp);
 
         titleEdit.setText(presenter.getTitle());
 
@@ -112,7 +103,7 @@ public class TodoImageActivity extends TodoActivity implements ITodoImageActivit
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
             if (requestCode == SELECT_PICTURE) {
-                presenter.addElement(getPath(data.getData()));
+                presenter.addElement(presenter.getPath(data.getData()));
                 onResume();
             }
             if (requestCode == REQUEST_IMAGE_CAPTURE) {
@@ -167,29 +158,6 @@ public class TodoImageActivity extends TodoActivity implements ITodoImageActivit
         onResume();
     }
 
-    public String getPath(Uri uri){
-        String wholeID = DocumentsContract.getDocumentId(uri);
-        String id = wholeID.split(":")[1];
-        String[] column = { MediaStore.Images.Media.DATA };
-
-        String sel = MediaStore.Images.Media._ID + "=?";
-
-        Cursor cursor = getContentResolver().
-                query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                        column, sel, new String[]{ id }, null);
-        String filePath = "";
-        int columnIndex = 0;
-        if (cursor != null) {
-            columnIndex = cursor.getColumnIndex(column[0]);
-        }
-        if (cursor.moveToFirst()) {
-            filePath = cursor.getString(columnIndex);
-        }
-        cursor.close();
-
-        return filePath;
-    }
-
     public void chooseColor(View view){
         String tag = (String) view.getTag();
         presenter.setColor(tag);
@@ -213,5 +181,10 @@ public class TodoImageActivity extends TodoActivity implements ITodoImageActivit
     public void deleteNotification(View view){
         presenter.removeAlarm(this);
         Toast.makeText(this.getBaseContext(), R.string.alarm_del, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public Context getContext() {
+        return getContext();
     }
 }

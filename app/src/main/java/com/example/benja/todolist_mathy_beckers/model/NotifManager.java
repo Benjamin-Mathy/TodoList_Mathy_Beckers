@@ -10,7 +10,6 @@ import static android.content.Context.ALARM_SERVICE;
 /**
  * Created by Benja on 16-05-17.
  */
-
 public class NotifManager {
     public AlarmManager alarmManager;
     Activity activity;
@@ -21,7 +20,6 @@ public class NotifManager {
     }
 
     public void addAlarm(long alarmTime, Todo todolist) {
-
         Intent intent = new Intent(activity, AlertLauncher.class );
         intent.putExtra("name", todolist.getName());
         intent.putExtra("color", todolist.getColor());
@@ -29,6 +27,7 @@ public class NotifManager {
 
         alarmManager.set(AlarmManager.RTC_WAKEUP, alarmTime, pi);
     }
+
     public void removeAlarm(Todo todolist) {
         Intent intent = new Intent(activity, AlertLauncher.class );
         intent.putExtra("name", todolist.getName());

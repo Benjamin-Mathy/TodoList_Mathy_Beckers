@@ -1,6 +1,11 @@
 package com.example.benja.todolist_mathy_beckers.presenter;
 
 import android.app.Activity;
+import android.database.Cursor;
+import android.net.Uri;
+import android.provider.DocumentsContract;
+import android.provider.MediaStore;
+
 import com.example.benja.todolist_mathy_beckers.dataSource.IElementDAO;
 import com.example.benja.todolist_mathy_beckers.dataSource.ITodolistDAO;
 import com.example.benja.todolist_mathy_beckers.model.Colors;
@@ -14,7 +19,6 @@ import java.util.List;
 /**
  * Created by Max on 08-05-17.
  */
-
 public class TodoImagePresenter extends BasePresenter implements ITodoImagePresenter {
 
     ITodoImageActivity view;
@@ -93,5 +97,28 @@ public class TodoImagePresenter extends BasePresenter implements ITodoImagePrese
     public void removeAlarm(Activity activity) {
         notifManager = new NotifManager(activity);
         notifManager.removeAlarm(getTodoDAO().readTodolist(todoId));
+    }
+
+    public String getPath(Uri uri){
+        String wholeID = DocumentsContract.getDocumentId(uri);
+        String id = wholeID.split(":")[1];
+        String[] column = { MediaStore.Images.Media.DATA };
+
+        String sel = MediaStore.Images.Media._ID + "=?";
+
+        Cursor cursor = view.getContext().getContentResolver().
+                query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                        column, sel, new String[]{ id }, null);
+        String filePath = "";
+        int columnIndex = 0;
+        if (cursor != null) {
+            columnIndex = cursor.getColumnIndex(column[0]);
+        }
+        if (cursor.moveToFirst()) {
+            filePath = cursor.getString(columnIndex);
+        }
+        cursor.close();
+
+        return filePath;
     }
 }

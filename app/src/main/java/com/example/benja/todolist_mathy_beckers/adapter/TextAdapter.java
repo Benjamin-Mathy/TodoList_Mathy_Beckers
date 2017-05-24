@@ -14,7 +14,6 @@ import java.util.List;
 /**
  * Created by Max on 29-04-17.
  */
-
 public class TextAdapter extends BaseAdapter {
 
     private Context context;

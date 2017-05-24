@@ -11,9 +11,7 @@ public class ElementImage extends Element {
 
     private String image;
 
-    public ElementImage(){
-
-    }
+    public ElementImage(){}
 
     public String getImage() {
         return image;

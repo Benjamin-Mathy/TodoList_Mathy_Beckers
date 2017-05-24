@@ -12,8 +12,8 @@ import java.util.List;
 /**
  * Created by Max on 18-04-17.
  */
-
 public class ElementDAO extends BaseDAO implements IElementDAO {
+
     public ElementDAO(Context _context) {
         super(_context);
     }
@@ -21,42 +21,37 @@ public class ElementDAO extends BaseDAO implements IElementDAO {
     @Override
     public long createElement(Element element, int idTodo) {
         openW();
-        ContentValues values = new ContentValues();
 
+        ContentValues values = new ContentValues();
         values.put(ElementTable.FeedEntry.COLUMN_TEXT, element.getText());
         values.put(ElementTable.FeedEntry.COLUMN_INDEX, element.getIndex());
         values.put(ElementTable.FeedEntry.COLUMN_FK_TODOLIST, idTodo);
 
         long elementId = getDatabase().insert(ElementTable.FeedEntry.TABLE_NAME, null, values);
-
         close();
-
         return elementId;
     }
+
     @Override
     public long createElement(ElementImage element, int idTodo) {
         openW();
 
         ContentValues values = new ContentValues();
-
         values.put(ElementTable.FeedEntry.COLUMN_TEXT, element.getText());
         values.put(ElementTable.FeedEntry.COLUMN_INDEX, element.getIndex());
         values.put(ElementTable.FeedEntry.COLUMN_FK_TODOLIST, idTodo);
         values.put(ElementTable.FeedEntry.COLUMN_IMAGE, element.getImage());
 
         long elementId = getDatabase().insert(ElementTable.FeedEntry.TABLE_NAME, null, values);
-
         close();
-
         return elementId;
     }
-
 
     @Override
     public List<Element> readElement(int idTodolist) {
         openR();
-        Cursor cursor = getElements(idTodolist);
 
+        Cursor cursor = getElements(idTodolist);
         List<Element> Elements = new ArrayList<>();
         while(cursor.moveToNext()) {
             Element currentElement = new Element();
@@ -69,11 +64,12 @@ public class ElementDAO extends BaseDAO implements IElementDAO {
         close();
         return Elements;
     }
+
     @Override
     public List<ElementImage> readElementImage(int idTodolist) {
         openR();
-        Cursor cursor = getElements(idTodolist);
 
+        Cursor cursor = getElements(idTodolist);
         List<ElementImage> Elements = new ArrayList<>();
         while(cursor.moveToNext()) {
             ElementImage currentElement = new ElementImage();
@@ -105,7 +101,6 @@ public class ElementDAO extends BaseDAO implements IElementDAO {
                 values,
                 selection,
                 selectionArgs);
-
         close();
     }
 
@@ -127,10 +122,8 @@ public class ElementDAO extends BaseDAO implements IElementDAO {
                 values,
                 selection,
                 selectionArgs);
-
         close();
     }
-
 
     @Override
     public void deleteElement(Element element) {
@@ -140,7 +133,6 @@ public class ElementDAO extends BaseDAO implements IElementDAO {
         String[] selectionArgs = { Long.toString(element.getId())};
 
         getDatabase().delete(ElementTable.FeedEntry.TABLE_NAME, selection, selectionArgs);
-
         close();
     }
 
@@ -168,7 +160,6 @@ public class ElementDAO extends BaseDAO implements IElementDAO {
                 null,                                     // don't filter by row groups
                 sortOrder                                 // The sort order
         );
-
         return cursor;
     }
 }

@@ -5,7 +5,6 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -138,7 +137,7 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
 
     public void removeTodo(View view){
         final int position = todos.getPositionForView((View) view.getParent());
-        presenter.removeTodo(((Todo)todos.getItemAtPosition(position)));
+        presenter.removeTodo(((Todo)todos.getItemAtPosition(position)), this);
         onResume();
     }
 

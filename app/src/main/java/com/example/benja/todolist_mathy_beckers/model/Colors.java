@@ -3,7 +3,6 @@ package com.example.benja.todolist_mathy_beckers.model;
 /**
  * Created by Max on 13-04-17.
  */
-
 public enum Colors {
     RED("#E57373"),
     GREEN("#81C784"),

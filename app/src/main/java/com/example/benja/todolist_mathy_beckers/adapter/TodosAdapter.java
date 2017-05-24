@@ -16,7 +16,6 @@ import java.util.List;
 /**
  * Created by Max on 13-04-17.
  */
-
 public class TodosAdapter extends BaseAdapter {
 
     private Context context;

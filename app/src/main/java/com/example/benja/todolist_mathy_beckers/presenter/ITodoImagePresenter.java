@@ -13,28 +13,18 @@ import java.util.List;
 /**
  * Created by Max on 08-05-17.
  */
-
 public interface ITodoImagePresenter {
 
     List<ElementImage> getAllElements();
-
     void setTodoId(int id);
-
     void addElement(String imagePath);
-
     void removeElement(ElementImage element);
-
     void saveElements(List<ElementImage> elements);
-
     void setColor(String tag);
-
     void setTitle(String title);
-
     String getTitle();
-
     Colors getColor();
-
     void addAlarm(Activity activity, long alarmTime);
-
     void removeAlarm(Activity activity);
+    String getPath(Uri uri);
 }

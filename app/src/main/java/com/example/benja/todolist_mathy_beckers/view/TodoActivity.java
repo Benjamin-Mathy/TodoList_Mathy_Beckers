@@ -2,6 +2,7 @@ package com.example.benja.todolist_mathy_beckers.view;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -16,7 +17,6 @@ import java.util.GregorianCalendar;
 /**
  * Created by Max on 23-05-17.
  */
-
 public abstract class TodoActivity extends AppCompatActivity {
 
     private LinearLayout menu;
@@ -32,6 +32,11 @@ public abstract class TodoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_back_24dp);
 
         menu = (LinearLayout) findViewById(R.id.settings_menu);
         openMenu = (Button) findViewById(R.id.parametersMenu);
@@ -77,7 +82,6 @@ public abstract class TodoActivity extends AppCompatActivity {
         int minute = timePicker.getCurrentMinute();
 
         calendar = new GregorianCalendar(year,month,day, hour, minute);
-
         alarmMenu.setVisibility(view.INVISIBLE);
     }
 

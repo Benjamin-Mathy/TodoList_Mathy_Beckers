@@ -7,7 +7,6 @@ import java.util.List;
 /**
  * Created by Max on 18-04-17.
  */
-
 public interface IElementDAO {
 
     long createElement(Element element, int idTodo);

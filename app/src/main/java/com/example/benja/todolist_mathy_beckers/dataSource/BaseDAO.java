@@ -8,7 +8,6 @@ import com.example.benja.todolist_mathy_beckers.database.DBHelper;
 /**
  * Created by Max on 18-04-17.
  */
-
 public abstract class BaseDAO {
     private SQLiteDatabase database;
     private DBHelper dbHelper;

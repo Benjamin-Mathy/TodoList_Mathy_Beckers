@@ -14,7 +14,6 @@ import java.util.List;
 /**
  * Created by Max on 18-04-17.
  */
-
 public class TodolistDAO extends BaseDAO implements ITodolistDAO {
 
     Context context;
@@ -29,15 +28,12 @@ public class TodolistDAO extends BaseDAO implements ITodolistDAO {
         openW();
 
         ContentValues values = new ContentValues();
-
         values.put(TodolistTable.FeedEntry.COLUMN_TYPE, todo.getType().toString());
         values.put(TodolistTable.FeedEntry.COLUMN_NAME, todo.getName());
         values.put(TodolistTable.FeedEntry.COLUMN_COLOR, todo.getColor().toString());
 
         long todoId = getDatabase().insert(TodolistTable.FeedEntry.TABLE_NAME, null, values);
-
         close();
-
         return todoId;
     }
 
@@ -60,9 +56,7 @@ public class TodolistDAO extends BaseDAO implements ITodolistDAO {
         openR();
 
         Cursor cursor = getTodo(idTodolist);
-
         Todo todo = new Todo();
-
         cursor.moveToFirst();
 
         todo.setId(cursor.getLong(cursor.getColumnIndexOrThrow(TodolistTable.FeedEntry._ID)));
@@ -92,7 +86,6 @@ public class TodolistDAO extends BaseDAO implements ITodolistDAO {
                 values,
                 selection,
                 selectionArgs);
-
         close();
     }
 
@@ -104,7 +97,6 @@ public class TodolistDAO extends BaseDAO implements ITodolistDAO {
         String[] selectionArgs = { Long.toString(todo.getId())};
 
         getDatabase().delete(TodolistTable.FeedEntry.TABLE_NAME, selection, selectionArgs);
-
         close();
     }
 
@@ -130,7 +122,6 @@ public class TodolistDAO extends BaseDAO implements ITodolistDAO {
         );
 
         List<Todo> todolists = new ArrayList<>();
-
         while(cursor.moveToNext()) {
             Todo todo = new Todo();
             todo.setId(cursor.getLong(cursor.getColumnIndexOrThrow(TodolistTable.FeedEntry._ID)));
@@ -139,7 +130,6 @@ public class TodolistDAO extends BaseDAO implements ITodolistDAO {
             todo.setType(TodoType.valueFor(cursor.getString(cursor.getColumnIndexOrThrow(TodolistTable.FeedEntry.COLUMN_TYPE))));
             todolists.add(todo);
         }
-
         cursor.close();
         close();
         return todolists;
@@ -165,8 +155,6 @@ public class TodolistDAO extends BaseDAO implements ITodolistDAO {
                 null,                                     // don't filter by row groups
                 null                                      // The sort order
         );
-
-
         return cursor;
     }
 }

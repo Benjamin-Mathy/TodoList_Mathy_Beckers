@@ -38,6 +38,7 @@ public class MapManager implements OnMapReadyCallback, LocationListener {
     public MapManager(Activity activity){
         this.activity=activity;
     }
+
     public void InitializeMap(MapFragment mapFragment){
 
         mapFragment.getMapAsync(this);
@@ -51,6 +52,7 @@ public class MapManager implements OnMapReadyCallback, LocationListener {
         }
         mGeofenceList = new ArrayList<>();
     }
+
     @Override
     public void onMapReady(GoogleMap map){
         this.map=map;
@@ -58,7 +60,6 @@ public class MapManager implements OnMapReadyCallback, LocationListener {
                 == PackageManager.PERMISSION_GRANTED) {
             this.map.setMyLocationEnabled(true);
         }
-
         this.map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
 
             @Override
@@ -67,6 +68,7 @@ public class MapManager implements OnMapReadyCallback, LocationListener {
             }
         });
     }
+
     public void mapClicked(LatLng location){
         this.map.clear();
         if(location != null) {
@@ -75,6 +77,7 @@ public class MapManager implements OnMapReadyCallback, LocationListener {
                     .title("Marker"));
         }
     }
+
     @Override
     public void onLocationChanged(Location location) {
         mLastLocation=location;
@@ -93,14 +96,16 @@ public class MapManager implements OnMapReadyCallback, LocationListener {
                     .title("Marker"));
         }
     }
+
     public void connectGoogleApiClient(){
         mGoogleApiClient.connect();
     }
+
     public void disconectGoogleApiClient(){
         mGoogleApiClient.disconnect();
     }
-    public void createGeofences() {
 
+    public void createGeofences() {
         String id = UUID.randomUUID().toString();
         Geofence fence = new Geofence.Builder()
                 .setRequestId(id)

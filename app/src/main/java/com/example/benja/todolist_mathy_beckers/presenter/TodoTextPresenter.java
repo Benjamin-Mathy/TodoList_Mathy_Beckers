@@ -14,7 +14,6 @@ import java.util.List;
 /**
  * Created by Max on 14-04-17.
  */
-
 public class TodoTextPresenter extends BasePresenter implements ITodoTextPresenter {
 
     ITodoTextActivity view;
